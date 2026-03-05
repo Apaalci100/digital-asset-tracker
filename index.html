@@ -6,6 +6,7 @@
 <title>Digital Asset Tracker · Chile</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -189,6 +190,100 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .b1{animation:riseUp 2.2s ease-in-out infinite 0s}.b2{animation:riseUp 2.2s ease-in-out infinite .15s}
 .b3{animation:riseUp 2.2s ease-in-out infinite .3s}.b4{animation:riseUp 2.2s ease-in-out infinite .45s}
 
+/* ── USER BADGE IN HEADER ── */
+.user-area{display:flex;align-items:center;gap:.5rem}
+.user-btn{display:flex;align-items:center;gap:.4rem;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.35rem .75rem;cursor:pointer;font-size:.7rem;font-weight:600;color:var(--text2);font-family:inherit;transition:.2s}
+.user-btn:hover{border-color:var(--accent);color:var(--accent)}
+.user-btn.logged{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);color:#059669}
+.pro-badge{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:.58rem;font-weight:800;padding:.12rem .45rem;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+.free-badge{background:var(--surface2);border:1px solid var(--border);color:var(--text3);font-size:.58rem;font-weight:700;padding:.12rem .45rem;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+
+/* ── MODALS BASE ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:0 24px 64px rgba(0,0,0,.25);width:100%;max-width:440px;overflow:hidden;animation:slideUp .25s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{padding:1.4rem 1.5rem 0;display:flex;align-items:flex-start;justify-content:space-between}
+.modal-title{font-size:1.15rem;font-weight:800;color:var(--text)}
+.modal-sub{font-size:.72rem;color:var(--text3);margin-top:.2rem}
+.modal-close{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:.9rem;color:var(--text3);display:flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0}
+.modal-close:hover{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red)}
+.modal-body{padding:1.25rem 1.5rem 1.5rem}
+
+/* AUTH MODAL */
+.auth-tabs{display:flex;gap:.35rem;margin-bottom:1rem;background:var(--surface2);border-radius:8px;padding:.3rem}
+.auth-tab{flex:1;font-size:.75rem;font-weight:700;padding:.4rem;border-radius:6px;border:none;background:none;cursor:pointer;color:var(--text3);font-family:inherit;transition:.2s}
+.auth-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--sh)}
+.auth-field{display:flex;flex-direction:column;gap:.28rem;margin-bottom:.75rem}
+.auth-label{font-size:.62rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.auth-input{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.55rem .8rem;outline:none;transition:border-color .2s;width:100%}
+.auth-input:focus{border-color:var(--accent)}
+.auth-submit{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:9px;padding:.65rem;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;margin-top:.25rem}
+.auth-submit:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(14,165,233,.4)}
+.auth-submit:disabled{opacity:.6;cursor:wait;transform:none}
+.auth-divider{display:flex;align-items:center;gap:.75rem;margin:.85rem 0;color:var(--text3);font-size:.68rem}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.auth-msg{font-size:.72rem;text-align:center;padding:.4rem;border-radius:6px;margin-top:.5rem}
+.auth-msg.err{background:rgba(239,68,68,.08);color:var(--red)}
+.auth-msg.ok{background:rgba(16,185,129,.08);color:var(--green)}
+
+/* PRO MODAL */
+.modal.modal-pro{max-width:520px}
+.pro-plans{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
+.pro-plan{border:2px solid var(--border);border-radius:12px;padding:1rem;cursor:pointer;transition:.2s;position:relative}
+.pro-plan:hover{border-color:var(--accent)}
+.pro-plan.featured{border-color:var(--accent);background:rgba(14,165,233,.03)}
+.pro-plan-badge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:.58rem;font-weight:800;padding:.18rem .65rem;border-radius:20px;white-space:nowrap;letter-spacing:.5px}
+.pro-plan-name{font-size:.72rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem}
+.pro-plan-price{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:800;color:var(--text);line-height:1}
+.pro-plan-period{font-size:.65rem;font-weight:500;color:var(--text3)}
+.pro-plan-features{margin-top:.65rem;display:flex;flex-direction:column;gap:.25rem}
+.pro-feat{font-size:.7rem;color:var(--text2);display:flex;align-items:center;gap:.35rem}
+.pro-feat::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0}
+.pro-feat.no{color:var(--text3)}.pro-feat.no::before{content:'✗';color:var(--text3)}
+.pro-cta{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:.7rem;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;margin-bottom:.6rem}
+.pro-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(14,165,233,.4)}
+.pro-cta.gold{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.pro-cta.gold:hover{box-shadow:0 6px 18px rgba(245,158,11,.4)}
+.pro-legal{font-size:.62rem;color:var(--text3);text-align:center;line-height:1.5}
+
+/* LOCK OVERLAY on cards */
+.card-lock{position:absolute;inset:0;background:rgba(var(--surface-rgb,255,255,255),.85);backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;z-index:10;border-radius:var(--r)}
+[data-theme=dark] .card-lock{background:rgba(12,25,41,.88)}
+.lock-icon{font-size:1.6rem}
+.lock-msg{font-size:.78rem;font-weight:700;color:var(--text2);text-align:center}
+.lock-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:8px;padding:.42rem 1rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.lock-btn:hover{transform:translateY(-1px)}
+
+/* FREE LIMIT BAR */
+.limit-bar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.7rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;box-shadow:var(--sh)}
+.limit-info{display:flex;flex-direction:column;gap:.18rem}
+.limit-label{font-size:.62rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.limit-count{font-size:.82rem;font-weight:700;color:var(--text)}
+.limit-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;max-width:180px}
+.limit-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:3px;transition:width .4s}
+.limit-fill.warn{background:linear-gradient(90deg,var(--amber),var(--red))}
+.upgrade-small-btn{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:7px;padding:.38rem .9rem;font-size:.7rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:.2s}
+.upgrade-small-btn:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(245,158,11,.35)}
+
+/* AFFILIATE BANNER */
+.affiliate-section{margin-top:2rem}
+.affiliate-title{font-size:.62rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.6rem}
+.affiliate-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+.aff-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.15rem;display:flex;align-items:center;gap:.9rem;box-shadow:var(--sh);text-decoration:none;transition:.2s}
+.aff-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shlg)}
+.aff-logo{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.aff-logo.buda{background:linear-gradient(135deg,#ff6b35,#e84c1e)}
+.aff-logo.binance{background:linear-gradient(135deg,#f3ba2f,#d4a017)}
+.aff-logo.ledger{background:linear-gradient(135deg,#0f172a,#1e293b)}
+.aff-logo.kraken{background:linear-gradient(135deg,#5741d9,#4c35b8)}
+.aff-info{flex:1}
+.aff-name{font-size:.88rem;font-weight:700;color:var(--text)}
+.aff-desc{font-size:.68rem;color:var(--text3);margin-top:.08rem;line-height:1.4}
+.aff-commission{font-size:.62rem;font-weight:700;color:var(--green);margin-top:.25rem;display:flex;align-items:center;gap:.3rem}
+.aff-arrow{color:var(--text3);font-size:.9rem;transition:.2s}
+.aff-card:hover .aff-arrow{color:var(--accent);transform:translateX(3px)}
+
 @media(max-width:1024px){
   .card-main{grid-template-columns:70px 160px 200px 1fr 90px 100px}
 }
@@ -218,6 +313,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="header-right">
       <div class="badge"><span class="dot" id="hDot"></span><span id="hLbl">Conectando…</span></div>
       <div class="badge" style="font-family:'JetBrains Mono',monospace;font-size:.62rem"><span id="lastUpd">—</span></div>
+      <div class="user-area">
+        <button class="user-btn" id="userBtn" onclick="openAuth()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="userBtnTxt">Ingresar</span>
+        </button>
+        <button class="upgrade-small-btn" id="upgradeHeaderBtn" onclick="openPro()" style="display:none">⚡ Hazte Pro</button>
+      </div>
       <button class="theme-btn" onclick="toggleTheme()">
         <svg id="thIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"/>
@@ -444,11 +546,174 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   <div class="section-hdr">
     <div class="section-title">Portfolio · ordenado por cantidad descendente</div>
   </div>
+
+  <!-- FREE PLAN LIMIT BAR -->
+  <div class="limit-bar" id="limitBar">
+    <div class="limit-info">
+      <div class="limit-label">Plan Gratuito · Activos</div>
+      <div class="limit-count"><span id="limitUsed">0</span> / 5 activos</div>
+    </div>
+    <div class="limit-track"><div class="limit-fill" id="limitFill" style="width:0%"></div></div>
+    <button class="upgrade-small-btn" onclick="openPro()">⚡ Ampliar a Pro</button>
+  </div>
+
   <div id="cardList"></div>
+
+  <!-- AFFILIATE SECTION -->
+  <div class="affiliate-section">
+    <div class="affiliate-title">🤝 Exchanges recomendados · Comisión por referido</div>
+    <div class="affiliate-cards">
+      <a class="aff-card" href="https://www.buda.com/registro?ref=DIGITALASSET" target="_blank" rel="noopener">
+        <div class="aff-logo buda">🦁</div>
+        <div class="aff-info">
+          <div class="aff-name">Buda.com</div>
+          <div class="aff-desc">Exchange chileno · BTC, ETH, XRP, XLM y más · Pesos chilenos</div>
+          <div class="aff-commission">✦ 20% comisión por referido · KYC en español</div>
+        </div>
+        <span class="aff-arrow">→</span>
+      </a>
+      <a class="aff-card" href="https://accounts.binance.com/register?ref=DIGITALASSET" target="_blank" rel="noopener">
+        <div class="aff-logo binance">◈</div>
+        <div class="aff-info">
+          <div class="aff-name">Binance</div>
+          <div class="aff-desc">Mayor exchange del mundo · +350 criptomonedas · Spot y Futures</div>
+          <div class="aff-commission">✦ 40% comisión por referido · Sin mínimo</div>
+        </div>
+        <span class="aff-arrow">→</span>
+      </a>
+      <a class="aff-card" href="https://www.ledger.com/?r=DIGITALASSET" target="_blank" rel="noopener">
+        <div class="aff-logo ledger">🔐</div>
+        <div class="aff-info">
+          <div class="aff-name">Ledger Hardware Wallet</div>
+          <div class="aff-desc">Billetera física más segura del mercado · Nano S Plus, Nano X</div>
+          <div class="aff-commission">✦ 10% comisión · Envío a Chile disponible</div>
+        </div>
+        <span class="aff-arrow">→</span>
+      </a>
+      <a class="aff-card" href="https://www.kraken.com/sign-up?referral=DIGITALASSET" target="_blank" rel="noopener">
+        <div class="aff-logo kraken">🐙</div>
+        <div class="aff-info">
+          <div class="aff-name">Kraken</div>
+          <div class="aff-desc">Exchange regulado · +200 pares · Staking disponible · API pro</div>
+          <div class="aff-commission">✦ 20% comisión · Soporte 24/7</div>
+        </div>
+        <span class="aff-arrow">→</span>
+      </a>
+    </div>
+  </div>
 
 </div><!-- /main -->
 
-<script>
+<!-- ══ AUTH MODAL ══ -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Bienvenido 👋</div>
+        <div class="modal-sub">Guarda tu portfolio y accede desde cualquier dispositivo</div>
+      </div>
+      <button class="modal-close" onclick="closeAuth()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchAuth('login')">Ingresar</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchAuth('register')">Crear cuenta</button>
+      </div>
+      <div id="authLogin">
+        <div class="auth-field">
+          <div class="auth-label">Correo electrónico</div>
+          <input class="auth-input" id="loginEmail" type="email" placeholder="tu@correo.cl">
+        </div>
+        <div class="auth-field">
+          <div class="auth-label">Contraseña</div>
+          <input class="auth-input" id="loginPass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="auth-submit" id="loginBtn" onclick="doLogin()">Ingresar</button>
+        <div id="loginMsg"></div>
+      </div>
+      <div id="authRegister" style="display:none">
+        <div class="auth-field">
+          <div class="auth-label">Correo electrónico</div>
+          <input class="auth-input" id="regEmail" type="email" placeholder="tu@correo.cl">
+        </div>
+        <div class="auth-field">
+          <div class="auth-label">Contraseña</div>
+          <input class="auth-input" id="regPass" type="password" placeholder="Mínimo 6 caracteres" onkeydown="if(event.key==='Enter')doRegister()">
+        </div>
+        <button class="auth-submit" id="regBtn" onclick="doRegister()">Crear cuenta gratis</button>
+        <div id="regMsg"></div>
+        <div class="auth-divider">Plan gratuito incluye</div>
+        <div style="display:flex;flex-direction:column;gap:.3rem">
+          <div class="pro-feat">Hasta 5 criptoactivos en tu portfolio</div>
+          <div class="pro-feat">Precios en tiempo real + conversión CLP</div>
+          <div class="pro-feat">Calculadora tributaria básica</div>
+          <div class="pro-feat">Acceso desde cualquier dispositivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRO MODAL ══ -->
+<div class="modal-overlay" id="proModal">
+  <div class="modal modal-pro">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">⚡ Elige tu plan</div>
+        <div class="modal-sub">Desbloquea todo el potencial de Digital Asset Tracker</div>
+      </div>
+      <button class="modal-close" onclick="closePro()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="pro-plans">
+        <div class="pro-plan">
+          <div class="pro-plan-name">Pro</div>
+          <div class="pro-plan-price">$9.990 <span class="pro-plan-period">CLP/mes</span></div>
+          <div class="pro-plan-features">
+            <div class="pro-feat">Activos ilimitados</div>
+            <div class="pro-feat">PDF para contador</div>
+            <div class="pro-feat">Minería &amp; Staking calc.</div>
+            <div class="pro-feat">Importar CSV exchanges</div>
+            <div class="pro-feat">Alertas de precio</div>
+            <div class="pro-feat no">Multi-cliente</div>
+          </div>
+        </div>
+        <div class="pro-plan featured">
+          <div class="pro-plan-badge">⭐ MÁS POPULAR</div>
+          <div class="pro-plan-name">Contador</div>
+          <div class="pro-plan-price">$49.990 <span class="pro-plan-period">CLP/mes</span></div>
+          <div class="pro-plan-features">
+            <div class="pro-feat">Todo lo de Pro</div>
+            <div class="pro-feat">Hasta 50 clientes</div>
+            <div class="pro-feat">Reportes F22 masivos</div>
+            <div class="pro-feat">Export Defontana/Nubox</div>
+            <div class="pro-feat">API acceso</div>
+            <div class="pro-feat">Soporte prioritario</div>
+          </div>
+        </div>
+      </div>
+      <button class="pro-cta" onclick="goCheckout('pro')">Comenzar Plan Pro · $9.990/mes</button>
+      <button class="pro-cta gold" onclick="goCheckout('contador')">Comenzar Plan Contador · $49.990/mes</button>
+      <div class="pro-legal">
+        Pago seguro via Stripe · Cancela cuando quieras · IVA incluido<br>
+        ¿Dudas? Escríbenos a <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4dcdbd8d5f4d0ddd3ddc0d5d8d5c7c7d1c0c0c6d5d7dfd1c69ad7d8">[email&#160;protected]</a></strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ═══ SUPABASE ═══ */
+const SUPABASE_URL='https://hfkvawnslyhumynisrtk.supabase.co';
+const SUPABASE_KEY='sb_publishable_BqzWstV-p6fh5_a5_sah0A_fJSsKXXO';
+let supabase=null;
+try{supabase=window.supabase?.createClient(SUPABASE_URL,SUPABASE_KEY);}catch(e){}
+
+/* ═══ PLAN STATE ═══ */
+const FREE_LIMIT=5;
+let currentUser=null;
+let userPlan='free'; // 'free' | 'pro' | 'contador'
+
 /* ═══ STATE ═══ */
 let dolarRate=862.82,isDark=false;
 const BASE_LOGO='https://cdn.jsdelivr.net/gh/simplr-sh/coin-logos/images';
@@ -535,14 +800,16 @@ function buildTicker(){
 function sortedCoins(){return[...coins].sort((a,b)=>b.qty-a.qty);}
 function buildCards(){
   const list=document.getElementById('cardList');list.innerHTML='';
-  sortedCoins().forEach(c=>{
+  sortedCoins().forEach((c,idx)=>{
+    const locked=!isPro()&&idx>=FREE_LIMIT;
     const tUSD=c.qty*c.price,tCLP=tUSD*dolarRate,pCLP=c.price*dolarRate;
     const imgHtml=c.img?`<img src="${c.img}" alt="${c.n}" class="coin-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:'';
     const fbStyle=c.img?'display:none':'';
     const w=document.createElement('div');w.className='card-wrap';w.id=`wrap-${c.id}`;
     w.innerHTML=`
-      <div class="crypto-card">
-        <div class="card-main">
+      <div class="crypto-card" style="position:relative">
+        ${locked?`<div class="card-lock"><span class="lock-icon">🔒</span><span class="lock-msg">Activo ${idx+1} · Solo disponible en Plan Pro</span><button class="lock-btn" onclick="openPro()">⚡ Hazte Pro</button></div>`:''}
+        <div class="card-main" style="${locked?'filter:blur(3px);pointer-events:none':''}">
           <div class="c-logo">${imgHtml}<div class="coin-fb" style="${fbStyle}">${c.n.substring(0,2)}</div></div>
           <div class="c-name">
             <div class="cn-name">${c.full||c.n}</div><div class="cn-sym">${c.n}</div>
@@ -593,6 +860,7 @@ function buildCards(){
     list.appendChild(w);
   });
   refreshTaxSelects();
+  updateLimitBar();
 }
 
 function onQty(id,val){
@@ -710,6 +978,10 @@ async function doSearch(q){
 }
 async function addCoin(id,sym,name,img){
   if(coins.some(c=>c.id===id)){document.getElementById('searchRes').innerHTML=`<div class="search-msg" style="color:var(--accent)">${name} ya está en el portfolio</div>`;return;}
+  if(!isPro()&&coins.length>=FREE_LIMIT){
+    document.getElementById('searchRes').innerHTML=`<div class="search-msg" style="color:var(--amber)">🔒 Límite del plan gratuito (${FREE_LIMIT} activos). <span style="cursor:pointer;color:var(--accent);font-weight:700" onclick="openPro()">Hazte Pro →</span></div>`;
+    return;
+  }
   const newCoin={n:sym,full:name,id,img,qty:0,price:0,chg:0};
   coins.push(newCoin);
   document.getElementById('searchIn').value='';
@@ -969,6 +1241,120 @@ function exportPDF(tab){
   doc.save(`informe-tributario-cripto-${tab}-${new Date().toLocaleDateString('es-CL').replace(/\//g,'-')}.pdf`);
 }
 
+/* ═══ AUTH MODALS ═══ */
+function openAuth(){document.getElementById('authModal').classList.add('open')}
+function closeAuth(){document.getElementById('authModal').classList.remove('open')}
+function openPro(){document.getElementById('proModal').classList.add('open')}
+function closePro(){document.getElementById('proModal').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeAuth();closePro();}});
+
+function switchAuth(tab){
+  const isLogin=tab==='login';
+  document.getElementById('authLogin').style.display=isLogin?'block':'none';
+  document.getElementById('authRegister').style.display=isLogin?'none':'block';
+  document.getElementById('tabLogin').className='auth-tab'+(isLogin?' active':'');
+  document.getElementById('tabRegister').className='auth-tab'+(!isLogin?' active':'');
+}
+
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const btn=document.getElementById('loginBtn');
+  const msg=document.getElementById('loginMsg');
+  if(!email||!pass){showMsg('loginMsg','Completa todos los campos','err');return;}
+  btn.disabled=true;btn.textContent='Ingresando…';
+  try{
+    if(supabase){
+      const{data,error}=await supabase.auth.signInWithPassword({email,password:pass});
+      if(error)throw error;
+      setUser(data.user);closeAuth();
+    } else {
+      // Demo mode sin Supabase configurado
+      simulateLogin(email);closeAuth();
+    }
+  }catch(e){showMsg('loginMsg',e.message||'Error al ingresar','err');}
+  btn.disabled=false;btn.textContent='Ingresar';
+}
+
+async function doRegister(){
+  const email=document.getElementById('regEmail').value.trim();
+  const pass=document.getElementById('regPass').value;
+  const btn=document.getElementById('regBtn');
+  if(!email||!pass){showMsg('regMsg','Completa todos los campos','err');return;}
+  if(pass.length<6){showMsg('regMsg','La contraseña debe tener al menos 6 caracteres','err');return;}
+  btn.disabled=true;btn.textContent='Creando cuenta…';
+  try{
+    if(supabase){
+      const{data,error}=await supabase.auth.signUp({email,password:pass});
+      if(error)throw error;
+      showMsg('regMsg','✓ Cuenta creada. Revisa tu email para confirmar.','ok');
+    } else {
+      simulateLogin(email);closeAuth();
+    }
+  }catch(e){showMsg('regMsg',e.message||'Error al registrar','err');}
+  btn.disabled=false;btn.textContent='Crear cuenta gratis';
+}
+
+function simulateLogin(email){
+  // Modo demo cuando Supabase no está configurado
+  setUser({email,id:'demo-'+Date.now()});
+}
+
+function setUser(user){
+  currentUser=user;
+  const btn=document.getElementById('userBtn');
+  const name=user.email.split('@')[0];
+  btn.className='user-btn logged';
+  btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${name} <span class="free-badge" id="planBadge">FREE</span>`;
+  btn.onclick=doLogout;
+  document.getElementById('upgradeHeaderBtn').style.display='flex';
+  updateLimitBar();
+}
+
+function doLogout(){
+  if(!confirm('¿Cerrar sesión?'))return;
+  if(supabase)supabase.auth.signOut();
+  currentUser=null;userPlan='free';
+  const btn=document.getElementById('userBtn');
+  btn.className='user-btn';
+  btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Ingresar`;
+  btn.onclick=openAuth;
+  document.getElementById('upgradeHeaderBtn').style.display='none';
+  buildCards();
+}
+
+function showMsg(id,txt,type){
+  const el=document.getElementById(id);if(!el)return;
+  el.className='auth-msg '+type;el.textContent=txt;
+  setTimeout(()=>{el.textContent='';el.className='auth-msg';},4000);
+}
+
+/* ═══ PLAN / LIMIT ═══ */
+function isPro(){return userPlan==='pro'||userPlan==='contador';}
+
+function goCheckout(plan){
+  // Cuando tengas Stripe configurado, redirigir a checkout:
+  // window.location.href = plan==='pro'
+  //   ? 'https://buy.stripe.com/tu-link-pro'
+  //   : 'https://buy.stripe.com/tu-link-contador';
+  alert(`✅ Próximamente disponible.\n\nPara suscribirte ahora escríbenos a:\nhola@digitalassettracker.cl\n\nPlan ${plan==='pro'?'Pro · $9.990':'Contador · $49.990'} CLP/mes`);
+}
+
+function updateLimitBar(){
+  const bar=document.getElementById('limitBar');
+  if(isPro()){bar.style.display='none';return;}
+  bar.style.display='flex';
+  const used=Math.min(coins.length,FREE_LIMIT);
+  const pct=Math.min((used/FREE_LIMIT)*100,100);
+  document.getElementById('limitUsed').textContent=used;
+  const fill=document.getElementById('limitFill');
+  fill.style.width=pct+'%';
+  fill.className='limit-fill'+(pct>=80?' warn':'');
+}
+
+/* ═══ CARDS — override to add lock ═══ */
+const _origBuildCards=buildCards; // will be redefined inline below
+
 /* ═══ TAX HIDE/SHOW ═══ */
 function hideTax(){
   document.getElementById('taxPanel').style.display='none';
@@ -1012,6 +1398,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   applyTheme();buildCards();buildTicker();updateMetrics();updateTs();
   fetchDolar();fetchCrypto();
   setInterval(fetchDolar,5*60*1000);setInterval(fetchCrypto,2*60*1000);setInterval(updateTs,30*1000);
+  // Restore session if Supabase configured
+  if(supabase){
+    supabase.auth.getSession().then(({data})=>{
+      if(data?.session?.user)setUser(data.session.user);
+    });
+    supabase.auth.onAuthStateChange((_,session)=>{
+      if(session?.user)setUser(session.user);
+    });
+  }
+  updateLimitBar();
 });
 </script>
 </body>
