@@ -6,7 +6,8 @@
 <title>Digital Asset Tracker · Chile</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -703,24 +704,26 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ═══ SUPABASE ═══ */
-const SUPABASE_URL='https://hfkvawnslyhumynisrtk.supabase.co';
-const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhma3Zhd25zbHlodW15bmlzcnRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2NzUxMTgsImV4cCI6MjA4ODI1MTExOH0.PF4S2vyTy79PxusoKNejS-UHNNjmXZIXz8JhoIKpkv4';
-let supabase=null;
-function initSupabase(){
+/* ═══ FIREBASE AUTH ═══ */
+const firebaseConfig = {
+  apiKey: "AIzaSyA5GTQztSYduZO8nl_BhJFXqBQe7RZhBxI",
+  authDomain: "digital-asset-tracker-84cdc.firebaseapp.com",
+  projectId: "digital-asset-tracker-84cdc",
+  storageBucket: "digital-asset-tracker-84cdc.firebasestorage.app",
+  messagingSenderId: "55199549937",
+  appId: "1:55199549937:web:bd42a9aa7c0e3cbf855c50"
+};
+let fbApp=null, fbAuth=null;
+function initFirebase(){
   try{
-    // El SDK expone createClient en window.supabase (UMD build)
-    const lib=window.supabase||window.supabaseJs;
-    if(lib?.createClient){
-      supabase=lib.createClient(SUPABASE_URL,SUPABASE_KEY);
-      console.log('✅ Supabase inicializado');
-    } else {
-      console.warn('⚠️ Supabase SDK no cargó — modo demo activo');
-    }
-  }catch(e){
-    console.error('❌ Supabase error:',e.message);
-    supabase=null;
-  }
+    fbApp=firebase.initializeApp(firebaseConfig);
+    fbAuth=firebase.auth();
+    fbAuth.onAuthStateChanged(user=>{
+      if(user){setUser(user);}
+      else{clearUser();}
+    });
+    console.log('✅ Firebase Auth listo');
+  }catch(e){console.error('❌ Firebase error:',e.message);}
 }
 
 /* ═══ PLAN STATE ═══ */
@@ -1256,10 +1259,10 @@ function exportPDF(tab){
 }
 
 /* ═══ AUTH MODALS ═══ */
-function openAuth(){document.getElementById('authModal').classList.add('open')}
-function closeAuth(){document.getElementById('authModal').classList.remove('open')}
-function openPro(){document.getElementById('proModal').classList.add('open')}
-function closePro(){document.getElementById('proModal').classList.remove('open')}
+function openAuth(){document.getElementById('authModal').classList.add('open');}
+function closeAuth(){document.getElementById('authModal').classList.remove('open');}
+function openPro(){document.getElementById('proModal').classList.add('open');}
+function closePro(){document.getElementById('proModal').classList.remove('open');}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeAuth();closePro();}});
 
 function switchAuth(tab){
@@ -1274,19 +1277,15 @@ async function doLogin(){
   const email=document.getElementById('loginEmail').value.trim();
   const pass=document.getElementById('loginPass').value;
   const btn=document.getElementById('loginBtn');
-  const msg=document.getElementById('loginMsg');
   if(!email||!pass){showMsg('loginMsg','Completa todos los campos','err');return;}
   btn.disabled=true;btn.textContent='Ingresando…';
   try{
-    if(supabase){
-      const{data,error}=await supabase.auth.signInWithPassword({email,password:pass});
-      if(error)throw error;
-      setUser(data.user);closeAuth();
-    } else {
-      // Demo mode sin Supabase configurado
-      simulateLogin(email);closeAuth();
-    }
-  }catch(e){showMsg('loginMsg',e.message||'Error al ingresar','err');}
+    await fbAuth.signInWithEmailAndPassword(email,pass);
+    closeAuth();
+  }catch(e){
+    const msgs={'auth/user-not-found':'Usuario no encontrado','auth/wrong-password':'Contraseña incorrecta','auth/invalid-email':'Email inválido','auth/invalid-credential':'Email o contraseña incorrectos'};
+    showMsg('loginMsg',msgs[e.code]||e.message,'err');
+  }
   btn.disabled=false;btn.textContent='Ingresar';
 }
 
@@ -1298,20 +1297,15 @@ async function doRegister(){
   if(pass.length<6){showMsg('regMsg','La contraseña debe tener al menos 6 caracteres','err');return;}
   btn.disabled=true;btn.textContent='Creando cuenta…';
   try{
-    if(supabase){
-      const{data,error}=await supabase.auth.signUp({email,password:pass});
-      if(error)throw error;
-      showMsg('regMsg','✓ Cuenta creada. Revisa tu email para confirmar.','ok');
-    } else {
-      simulateLogin(email);closeAuth();
-    }
-  }catch(e){showMsg('regMsg',e.message||'Error al registrar','err');}
+    await fbAuth.createUserWithEmailAndPassword(email,pass);
+    await fbAuth.currentUser.sendEmailVerification();
+    showMsg('regMsg','✅ Cuenta creada. Revisa tu email para verificar.','ok');
+    setTimeout(closeAuth,2500);
+  }catch(e){
+    const msgs={'auth/email-already-in-use':'Este email ya tiene una cuenta','auth/weak-password':'Contraseña muy débil','auth/invalid-email':'Email inválido'};
+    showMsg('regMsg',msgs[e.code]||e.message,'err');
+  }
   btn.disabled=false;btn.textContent='Crear cuenta gratis';
-}
-
-function simulateLogin(email){
-  // Modo demo cuando Supabase no está configurado
-  setUser({email,id:'demo-'+Date.now()});
 }
 
 function setUser(user){
@@ -1325,9 +1319,7 @@ function setUser(user){
   updateLimitBar();
 }
 
-function doLogout(){
-  if(!confirm('¿Cerrar sesión?'))return;
-  if(supabase)supabase.auth.signOut();
+function clearUser(){
   currentUser=null;userPlan='free';
   const btn=document.getElementById('userBtn');
   btn.className='user-btn';
@@ -1337,10 +1329,15 @@ function doLogout(){
   buildCards();
 }
 
+async function doLogout(){
+  if(!confirm('¿Cerrar sesión?'))return;
+  await fbAuth.signOut();
+}
+
 function showMsg(id,txt,type){
   const el=document.getElementById(id);if(!el)return;
   el.className='auth-msg '+type;el.textContent=txt;
-  setTimeout(()=>{el.textContent='';el.className='auth-msg';},4000);
+  setTimeout(()=>{el.textContent='';el.className='auth-msg';},5000);
 }
 
 /* ═══ PLAN / LIMIT ═══ */
@@ -1409,18 +1406,10 @@ async function fetchCrypto(retry=0){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  initSupabase();
+  initFirebase();
   applyTheme();buildCards();buildTicker();updateMetrics();updateTs();
   fetchDolar();fetchCrypto();
   setInterval(fetchDolar,5*60*1000);setInterval(fetchCrypto,2*60*1000);setInterval(updateTs,30*1000);
-  if(supabase){
-    supabase.auth.getSession().then(({data})=>{
-      if(data?.session?.user)setUser(data.session.user);
-    });
-    supabase.auth.onAuthStateChange((_,session)=>{
-      if(session?.user)setUser(session.user);
-    });
-  }
   updateLimitBar();
 });
 </script>
