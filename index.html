@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -704,7 +705,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ═══ FIREBASE AUTH ═══ */
+/* ═══ FIREBASE AUTH + FIRESTORE ═══ */
 const firebaseConfig = {
   apiKey: "AIzaSyA5GTQztSYduZO8nl_BhJFXqBQe7RZhBxI",
   authDomain: "digital-asset-tracker-84cdc.firebaseapp.com",
@@ -713,17 +714,86 @@ const firebaseConfig = {
   messagingSenderId: "55199549937",
   appId: "1:55199549937:web:bd42a9aa7c0e3cbf855c50"
 };
-let fbApp=null, fbAuth=null;
+let fbApp=null, fbAuth=null, fbDb=null;
+let saveTimer=null;
+
 function initFirebase(){
   try{
     fbApp=firebase.initializeApp(firebaseConfig);
     fbAuth=firebase.auth();
-    fbAuth.onAuthStateChanged(user=>{
-      if(user){setUser(user);}
-      else{clearUser();}
+    fbDb=firebase.firestore();
+    fbAuth.onAuthStateChanged(async user=>{
+      if(user){ setUser(user); await loadPortfolio(user.uid); }
+      else{ clearUser(); }
     });
-    console.log('✅ Firebase Auth listo');
+    console.log('✅ Firebase listo');
   }catch(e){console.error('❌ Firebase error:',e.message);}
+}
+
+/* ─── GUARDAR (debounce 1.5s) ─── */
+function scheduleSave(){
+  if(!currentUser||!fbDb)return;
+  clearTimeout(saveTimer);
+  showSaveToast('💾 Guardando…','saving');
+  saveTimer=setTimeout(async()=>{
+    try{
+      const data=coins.map(c=>({id:c.id,n:c.n,full:c.full||c.n,qty:c.qty,price:c.price,chg:c.chg,img:c.img||''}));
+      await fbDb.collection('portfolios').doc(currentUser.uid).set({
+        coins:data, updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+      });
+      showSaveToast('✅ Guardado','ok');
+    }catch(e){ showSaveToast('⚠️ Error al guardar','err'); }
+  },1500);
+}
+
+/* ─── CARGAR ─── */
+async function loadPortfolio(uid){
+  if(!fbDb)return;
+  showSaveToast('📡 Cargando portfolio…','saving');
+  try{
+    const doc=await fbDb.collection('portfolios').doc(uid).get();
+    if(doc.exists && doc.data().coins?.length>0){
+      coins=doc.data().coins.map(c=>({
+        id:c.id, n:c.n, full:c.full||c.n,
+        qty:parseFloat(c.qty)||0, price:parseFloat(c.price)||0,
+        chg:parseFloat(c.chg)||0, img:c.img||''
+      }));
+      buildCards(); buildTicker(); updateMetrics();
+      fetchCrypto(); // actualiza precios al cargar
+      showSaveToast('✅ Portfolio cargado','ok');
+    } else {
+      // Primer login: guarda el portfolio inicial
+      showSaveToast('✨ Guardando portfolio inicial…','saving');
+      await saveNow();
+    }
+  }catch(e){ showSaveToast('⚠️ No se pudo cargar','err'); }
+}
+
+async function saveNow(){
+  if(!currentUser||!fbDb)return;
+  try{
+    const data=coins.map(c=>({id:c.id,n:c.n,full:c.full||c.n,qty:c.qty,price:c.price,chg:c.chg,img:c.img||''}));
+    await fbDb.collection('portfolios').doc(currentUser.uid).set({
+      coins:data, updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    showSaveToast('✅ Guardado','ok');
+  }catch(e){ showSaveToast('⚠️ Error','err'); }
+}
+
+/* ─── TOAST ─── */
+function showSaveToast(msg,type='ok'){
+  let t=document.getElementById('saveToast');
+  if(!t){
+    t=document.createElement('div'); t.id='saveToast';
+    t.style.cssText='position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:.5rem 1rem;font-size:.72rem;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:opacity .4s;pointer-events:none';
+    document.body.appendChild(t);
+  }
+  if(!msg){t.style.opacity='0';return;}
+  t.style.opacity='1';
+  t.textContent=msg;
+  t.style.color=type==='err'?'#ef4444':type==='saving'?'#0ea5e9':'#10b981';
+  t.style.borderColor=type==='err'?'#ef4444':type==='saving'?'#0ea5e9':'#10b981';
+  if(type==='ok')setTimeout(()=>{t.style.opacity='0';},2500);
 }
 
 /* ═══ PLAN STATE ═══ */
@@ -886,6 +956,7 @@ function onQty(id,val){
   const tUSD=c.qty*c.price,tCLP=tUSD*dolarRate;
   setEl(`tu-${id}`,fUSD(tUSD));setEl(`tc-${id}`,fCLP(tCLP));
   updateMetrics();
+  scheduleSave();
 }
 function setEl(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
 
@@ -893,6 +964,7 @@ function removeCoin(id){
   coins=coins.filter(c=>c.id!==id);
   document.getElementById(`wrap-${id}`)?.remove();
   updateMetrics();buildTicker();refreshTaxSelects();
+  scheduleSave();
 }
 
 function refreshValues(){
@@ -1014,6 +1086,7 @@ async function addCoin(id,sym,name,img){
     if(el){el.scrollIntoView({behavior:'smooth',block:'center'});const cc=el.querySelector('.crypto-card');cc.style.borderColor='var(--green)';setTimeout(()=>{cc.style.borderColor='';},2000);}
     document.getElementById('searchRes').innerHTML='';
   },400);
+  scheduleSave();
 }
 
 /* ═══ TAX TABS ═══ */
