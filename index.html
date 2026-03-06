@@ -6,7 +6,7 @@
 <title>Digital Asset Tracker · Chile</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -705,9 +705,23 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══ SUPABASE ═══ */
 const SUPABASE_URL='https://hfkvawnslyhumynisrtk.supabase.co';
-const SUPABASE_KEY='sb_publishable_BqzWstV-p6fh5_a5_sah0A_fJSsKXXO';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhma3Zhd25zbHlodW15bmlzcnRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2NzUxMTgsImV4cCI6MjA4ODI1MTExOH0.PF4S2vyTy79PxusoKNejS-UHNNjmXZIXz8JhoIKpkv4';
 let supabase=null;
-try{supabase=window.supabase?.createClient(SUPABASE_URL,SUPABASE_KEY);}catch(e){}
+function initSupabase(){
+  try{
+    // El SDK expone createClient en window.supabase (UMD build)
+    const lib=window.supabase||window.supabaseJs;
+    if(lib?.createClient){
+      supabase=lib.createClient(SUPABASE_URL,SUPABASE_KEY);
+      console.log('✅ Supabase inicializado');
+    } else {
+      console.warn('⚠️ Supabase SDK no cargó — modo demo activo');
+    }
+  }catch(e){
+    console.error('❌ Supabase error:',e.message);
+    supabase=null;
+  }
+}
 
 /* ═══ PLAN STATE ═══ */
 const FREE_LIMIT=5;
@@ -1395,10 +1409,10 @@ async function fetchCrypto(retry=0){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
+  initSupabase();
   applyTheme();buildCards();buildTicker();updateMetrics();updateTs();
   fetchDolar();fetchCrypto();
   setInterval(fetchDolar,5*60*1000);setInterval(fetchCrypto,2*60*1000);setInterval(updateTs,30*1000);
-  // Restore session if Supabase configured
   if(supabase){
     supabase.auth.getSession().then(({data})=>{
       if(data?.session?.user)setUser(data.session.user);
