@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — Digital Asset Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06101e;--surf:#0c1929;--surf2:#111e30;--brd:#1a2d42;
+  --blue:#4f91f6;--blue2:#2d78f0;--green:#12d995;--red:#f25050;--amber:#f5a623;
+  --text:#deeaf8;--text2:#6b8fb5;--text3:#364f68;
+  --mono:'JetBrains Mono',monospace;
+}
+
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden;height:100vh;width:100vw}
+
+/* ── DEMO SHELL ── */
+#demo-shell{position:fixed;inset:0;display:flex;flex-direction:column;background:var(--bg)}
+
+/* ── PROGRESS BAR ── */
+#progress-bar{height:3px;background:rgba(79,145,246,.15);position:relative;flex-shrink:0}
+#progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));width:0%;transition:width .3s ease}
+
+/* ── SCENE CONTAINER ── */
+#scene-wrap{flex:1;position:relative;overflow:hidden}
+
+/* ── SCENES ── */
+.scene{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.scene.active{opacity:1;pointer-events:all}
+
+/* ── CAPTION BAR ── */
+#caption-bar{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(0deg,rgba(6,16,30,.95) 60%,transparent);
+  padding:2rem 3rem 1.5rem;z-index:100;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;
+}
+#caption-text{
+  font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:600;
+  color:#fff;line-height:1.5;max-width:680px;
+  text-shadow:0 2px 12px rgba(0,0,0,.8);
+}
+#caption-text .highlight{color:var(--green)}
+#caption-text .blue{color:var(--blue)}
+
+/* ── CONTROLS ── */
+#demo-controls{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.ctrl-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);border-radius:8px;padding:.4rem .9rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s;white-space:nowrap}
+.ctrl-btn:hover{background:rgba(255,255,255,.15);color:#fff}
+.ctrl-btn.primary{background:linear-gradient(135deg,var(--blue),var(--blue2));border-color:transparent;color:#fff}
+#scene-counter{font-size:.72rem;color:var(--text3);font-family:var(--mono)}
+
+/* ── ANIMATED CURSOR ── */
+#cursor{
+  position:fixed;width:22px;height:22px;
+  background:rgba(255,255,255,.9);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 0 3px rgba(79,145,246,.4),0 4px 16px rgba(0,0,0,.5);
+  transition:transform .08s ease,width .2s,height .2s,background .2s;
+  mix-blend-mode:normal;
+}
+#cursor.clicking{transform:translate(-50%,-50%) scale(.7);background:var(--blue)}
+#cursor.typing{width:3px;height:20px;border-radius:2px;background:var(--blue)}
+#cursor-label{
+  position:fixed;z-index:9998;pointer-events:none;
+  background:rgba(6,16,30,.9);border:1px solid var(--brd);border-radius:6px;
+  padding:.3rem .65rem;font-size:.68rem;font-weight:600;color:var(--text2);
+  white-space:nowrap;opacity:0;transition:opacity .3s;
+  transform:translate(14px,14px);font-family:var(--mono);
+}
+#cursor-label.show{opacity:1}
+
+/* ────────────────────────────────────
+   SCENE 1 — LANDING
+──────────────────────────────────── */
+#s1{background:linear-gradient(160deg,#060d1c,#081528)}
+.s1-nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;border-bottom:1px solid rgba(255,255,255,.05)}
+.s1-logo{display:flex;align-items:center;gap:.75rem}
+.s1-logo-txt{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff}
+.s1-logo-sub{font-size:.6rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1px}
+.s1-nav-btns{display:flex;gap:.75rem}
+.s1-btn-ghost{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:.45rem 1.1rem;font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.s1-btn-solid{background:linear-gradient(135deg,#3b82f6,#2563eb);border:none;color:#fff;border-radius:8px;padding:.45rem 1.1rem;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.s1-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem 2rem;height:calc(100% - 80px)}
+.s1-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);color:#93c5fd;border-radius:20px;padding:.3rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:1.5rem}
+.s1-h1{font-family:'Syne',sans-serif;font-size:3.8rem;font-weight:800;line-height:1.05;margin-bottom:1rem}
+.s1-h1 span{background:linear-gradient(135deg,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.s1-sub{font-size:1rem;color:rgba(255,255,255,.55);max-width:500px;line-height:1.7;margin-bottom:2rem}
+.s1-ctas{display:flex;gap:1rem;justify-content:center}
+.s1-cta1{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;border:none;border-radius:12px;padding:.8rem 2rem;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 6px 20px rgba(59,130,246,.4)}
+.s1-cta2{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:12px;padding:.8rem 2rem;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+/* Wave canvas */
+#wave-canvas{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.6}
+#s1>*:not(#wave-canvas){position:relative;z-index:1}
+
+/* ────────────────────────────────────
+   SCENE 2 — REGISTER MODAL
+──────────────────────────────────── */
+#s2{display:flex;align-items:center;justify-content:center;background:rgba(6,16,30,.85);backdrop-filter:blur(8px)}
+.auth-modal{background:var(--surf);border:1px solid var(--brd);border-radius:18px;padding:2rem 2.5rem;width:380px;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+.auth-logo{display:flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;justify-content:center}
+.auth-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;text-align:center;margin-bottom:.4rem}
+.auth-sub{font-size:.78rem;color:var(--text2);text-align:center;margin-bottom:1.5rem}
+.auth-label{font-size:.68rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.35rem;display:block}
+.auth-input{width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:.6rem .9rem;font-size:.88rem;color:var(--text);font-family:'Inter',sans-serif;margin-bottom:1rem;outline:none}
+.auth-input.focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(79,145,246,.15)}
+.auth-btn{width:100%;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:10px;padding:.75rem;font-size:.92rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:.5rem}
+.auth-divider{text-align:center;font-size:.72rem;color:var(--text3);margin:.75rem 0}
+
+/* ────────────────────────────────────
+   SCENE 3 — DASHBOARD OVERVIEW
+──────────────────────────────────── */
+#s3,#s4,#s5,#s6{background:var(--bg)}
+.db-header{background:var(--surf);border-bottom:1px solid var(--brd);padding:.85rem 1.75rem;display:flex;justify-content:space-between;align-items:center}
+.db-logo{display:flex;align-items:center;gap:.6rem}
+.db-logo-txt{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800}
+.db-ticker{background:#060d18;border-bottom:1px solid var(--brd);height:36px;overflow:hidden;display:flex;align-items:center}
+.db-ticker-tag{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-size:.65rem;font-weight:800;padding:0 1rem;height:100%;display:flex;align-items:center;letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0}
+.db-ticker-inner{display:flex;align-items:center;gap:2rem;padding:0 1.5rem;animation:tickerScroll 18s linear infinite;white-space:nowrap}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.t-item{font-family:var(--mono);font-size:.72rem;display:flex;align-items:center;gap:.4rem;color:var(--text2)}
+.t-sym{color:var(--text);font-weight:700}
+.t-up{color:var(--green)}.t-dn{color:var(--red)}
+.db-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;padding:.75rem 1.75rem;background:var(--surf);border-bottom:1px solid var(--brd)}
+.db-metric{background:var(--surf2);border:1px solid var(--brd);border-radius:10px;padding:.75rem 1rem}
+.db-metric-lbl{font-size:.62rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem}
+.db-metric-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--text)}
+.db-metric-val.grad{background:linear-gradient(135deg,var(--blue),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.db-main{padding:1.25rem 1.75rem}
+.db-section-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem}
+.db-section-title{font-size:.78rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.8px}
+/* Card list */
+.db-card{background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:.85rem 1rem;display:grid;grid-template-columns:44px 140px 1fr 1fr 90px 90px;align-items:center;gap:.75rem;margin-bottom:.5rem;transition:background .2s}
+.db-card:hover,.db-card.hover{background:var(--surf2);border-color:rgba(79,145,246,.2)}
+.db-logo-cell{width:38px;height:38px;border-radius:50%;background:var(--surf2);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:var(--blue)}
+.db-name{font-weight:700;font-size:.9rem}
+.db-full{font-size:.7rem;color:var(--text2)}
+.db-price{font-family:var(--mono);font-size:.85rem;font-weight:600;text-align:right}
+.db-total{font-family:var(--mono);font-size:.9rem;font-weight:700;text-align:right}
+.db-chg{font-family:var(--mono);font-size:.8rem;font-weight:700;text-align:right;border-radius:6px;padding:.2rem .5rem}
+.up{color:var(--green);background:rgba(18,217,149,.1)}
+.dn{color:var(--red);background:rgba(242,80,80,.1)}
+
+/* ────────────────────────────────────
+   SCENE 4 — CARD HOVER DETAIL
+──────────────────────────────────── */
+.db-card-expanded{background:var(--surf2);border:1px solid rgba(79,145,246,.3) !important;border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:.5rem;box-shadow:0 8px 32px rgba(79,145,246,.1)}
+.db-card-expanded-grid{display:grid;grid-template-columns:44px 1fr;gap:1rem;align-items:start}
+.db-card-details{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--brd)}
+.db-detail{display:flex;flex-direction:column;gap:.25rem}
+.db-detail-lbl{font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.db-detail-val{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--text)}
+.db-detail-val.big{font-size:1.05rem;color:var(--green)}
+
+/* ────────────────────────────────────
+   SCENE 5 — CALCULATOR
+──────────────────────────────────── */
+.calc-overlay{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:50}
+.calc-modal{background:var(--surf);border:1px solid var(--brd);border-radius:18px;width:780px;max-height:85vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.7)}
+.calc-header{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--brd);position:sticky;top:0;background:var(--surf)}
+.calc-tabs{display:flex;gap:.4rem;padding:1rem 1.5rem .5rem}
+.ctab{font-size:.78rem;font-weight:700;padding:.42rem .95rem;border-radius:7px;border:1px solid var(--brd);background:var(--surf2);color:var(--text3);cursor:pointer;font-family:'Inter',sans-serif}
+.ctab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.calc-body{padding:1rem 1.5rem 1.5rem}
+.calc-alert{background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:.75rem 1rem;font-size:.78rem;color:var(--text2);margin-bottom:1rem;line-height:1.55}
+.calc-alert strong{color:var(--amber)}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
+.cf{display:flex;flex-direction:column;gap:.3rem}
+.cf-label{font-size:.66rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.cf-input{background:var(--surf2);border:1px solid var(--brd);border-radius:7px;padding:.55rem .75rem;font-size:.9rem;color:var(--text);font-family:var(--mono)}
+.cf-input.focus{border-color:var(--blue)}
+.gain-tbl{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:1rem}
+.gain-tbl th{background:var(--surf2);padding:.6rem .75rem;text-align:left;font-size:.65rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--brd)}
+.gain-tbl td{padding:.55rem .75rem;border-bottom:1px solid var(--brd);vertical-align:middle}
+.gain-tbl .gsym{font-weight:700;font-family:var(--mono);font-size:.82rem}
+.gain-tbl input{background:var(--surf2);border:1px solid var(--brd);border-radius:5px;padding:.3rem .5rem;font-size:.8rem;color:var(--text);font-family:var(--mono);width:100px}
+.gain-tbl input.focus{border-color:var(--blue)}
+.result-box{background:var(--surf2);border:1px solid var(--brd);border-radius:12px;padding:1.25rem 1.5rem;margin-top:1rem}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1rem}
+.r-card{background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.85rem 1rem}
+.r-card.gain-card{border-color:rgba(18,217,149,.3);background:rgba(18,217,149,.04)}
+.r-card.tax-card{border-color:rgba(79,145,246,.3);background:rgba(79,145,246,.04)}
+.r-lbl{font-size:.62rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:.35rem}
+.r-val{font-family:var(--mono);font-size:1rem;font-weight:800;color:var(--text)}
+.r-val.green{color:var(--green)}
+.r-val.blue{color:var(--blue)}
+.calc-run-btn{background:linear-gradient(135deg,var(--green),#059669);color:#fff;border:none;border-radius:8px;padding:.55rem 1.4rem;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+
+/* ────────────────────────────────────
+   SCENE 6 — PDF EXPORT
+──────────────────────────────────── */
+.pdf-preview{background:#f8fafc;border-radius:12px;padding:1.5rem 2rem;max-width:620px;margin:0 auto;color:#1e293b;font-family:'Inter',sans-serif}
+.pdf-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--blue);padding-bottom:1rem;margin-bottom:1.25rem}
+.pdf-brand{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:#0f172a}
+.pdf-meta{text-align:right;font-size:.72rem;color:#64748b}
+.pdf-r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:1rem}
+.pdf-r{padding:.75rem;border-radius:7px;border:1px solid #e2e8f0;background:#f8fafc}
+.pdf-r.g{border-color:#bbf7d0;background:#f0fdf4}
+.pdf-r.t{border-color:#bfdbfe;background:#eff6ff}
+.pdf-r-lbl{font-size:.62rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-bottom:.3rem}
+.pdf-r-val{font-family:var(--mono);font-size:.95rem;font-weight:800;color:#0f172a}
+.pdf-disclaimer{margin-top:1rem;padding:.75rem 1rem;background:#fefce8;border:1px solid #fde047;border-radius:7px;font-size:.65rem;color:#713f12;line-height:1.55}
+
+/* ── INTRO OVERLAY ── */
+#intro{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transition:opacity .8s ease}
+#intro.out{opacity:0;pointer-events:none}
+.intro-logo{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.intro-sub{font-size:.85rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase}
+.intro-line{width:60px;height:3px;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:2px;animation:introLine 1.2s ease forwards}
+@keyframes introLine{from{width:0}to{width:60px}}
+.intro-start-btn{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:10px;padding:.7rem 2rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;opacity:0;animation:fadeInUp .5s ease .8s forwards;margin-top:.5rem}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Highlight ring */
+.highlight-ring{position:fixed;pointer-events:none;z-index:9990;border-radius:12px;box-shadow:0 0 0 3px rgba(79,145,246,.6),0 0 0 6px rgba(79,145,246,.15);transition:all .4s ease;opacity:0}
+.highlight-ring.show{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-logo">Digital Asset Tracker</div>
+  <div class="intro-line"></div>
+  <div class="intro-sub">Demo interactivo · Chile 2025</div>
+  <button class="intro-start-btn" onclick="startDemo()">▶ Ver demo</button>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-label"></div>
+<div class="highlight-ring" id="highlight"></div>
+
+<!-- PROGRESS -->
+<div id="demo-shell">
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+
+  <div id="scene-wrap">
+
+    <!-- ── SCENE 1: LANDING ── -->
+    <div class="scene" id="s1">
+      <canvas id="wave-canvas"></canvas>
+      <nav class="s1-nav">
+        <div class="s1-logo">
+          <svg width="36" height="36" viewBox="0 0 100 100" fill="none"><rect x="10" y="60" width="18" height="30" rx="3" fill="#4f91f6"/><rect x="32" y="45" width="18" height="45" rx="3" fill="#4f91f6" opacity=".75"/><rect x="54" y="25" width="18" height="65" rx="3" fill="#4f91f6" opacity=".5"/><rect x="76" y="10" width="18" height="80" rx="3" fill="#12d995"/></svg>
+          <div><div class="s1-logo-txt">Digital Asset Tracker</div><div class="s1-logo-sub">Portfolio Analytics</div></div>
+        </div>
+        <div class="s1-nav-btns">
+          <button class="s1-btn-ghost" id="s1-login">Ingresar</button>
+          <button class="s1-btn-solid" id="s1-register">Crear cuenta gratis</button>
+        </div>
+      </nav>
+      <div class="s1-hero">
+        <div class="s1-tag">🇨🇱 Legislación SII 2025</div>
+        <h1 class="s1-h1">Tu portfolio cripto<br><span>en tiempo real</span></h1>
+        <p class="s1-sub">Rastrea tus activos, calcula tus impuestos y genera informes para tu contador — en pesos chilenos.</p>
+        <div class="s1-ctas">
+          <button class="s1-cta1" id="s1-cta1">Comenzar gratis</button>
+          <button class="s1-cta2" id="s1-demo">Ver demo →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SCENE 2: REGISTER ── -->
+    <div class="scene" id="s2">
+      <div class="auth-modal">
+        <div class="auth-logo">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><rect x="10" y="60" width="18" height="30" rx="3" fill="#4f91f6"/><rect x="32" y="45" width="18" height="45" rx="3" fill="#4f91f6" opacity=".75"/><rect x="54" y="25" width="18" height="65" rx="3" fill="#4f91f6" opacity=".5"/><rect x="76" y="10" width="18" height="80" rx="3" fill="#12d995"/></svg>
+        </div>
+        <div class="auth-title">Crear cuenta gratis</div>
+        <div class="auth-sub">Comienza a rastrear tu portfolio hoy</div>
+        <label class="auth-label">Correo electrónico</label>
+        <input class="auth-input" id="demo-email" placeholder="" readonly>
+        <label class="auth-label">Contraseña</label>
+        <input class="auth-input" id="demo-pass" type="password" placeholder="" readonly>
+        <button class="auth-btn">Crear cuenta →</button>
+        <div class="auth-divider">¿Ya tienes cuenta? Ingresar</div>
+      </div>
+    </div>
+
+    <!-- ── SCENE 3: DASHBOARD ── -->
+    <div class="scene" id="s3">
+      <div class="db-header">
+        <div class="db-logo">
+          <svg width="32" height="32" viewBox="0 0 100 100" fill="none"><rect x="10" y="60" width="18" height="30" rx="3" fill="#4f91f6"/><rect x="32" y="45" width="18" height="45" rx="3" fill="#4f91f6" opacity=".75"/><rect x="54" y="25" width="18" height="65" rx="3" fill="#4f91f6" opacity=".5"/><rect x="76" y="10" width="18" height="80" rx="3" fill="#12d995"/></svg>
+          <div class="db-logo-txt">Digital Asset Tracker</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.65rem">
+          <button style="background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:8px;padding:.38rem .85rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.35rem" id="calc-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+            Calculadora
+          </button>
+          <div style="background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.3);border-radius:7px;padding:.35rem .75rem;font-size:.72rem;font-weight:700;color:var(--green);display:flex;align-items:center;gap:.35rem">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            carlos.demo
+          </div>
+        </div>
+      </div>
+      <div class="db-ticker">
+        <div class="db-ticker-tag">LIVE</div>
+        <div style="overflow:hidden;flex:1">
+          <div class="db-ticker-inner" id="ticker-inner">
+            <span class="t-item"><span class="t-sym">XRP</span> $2.716 <span class="t-up">+4.2%</span></span>
+            <span class="t-item"><span class="t-sym">XLM</span> $0.165 <span class="t-dn">-2.1%</span></span>
+            <span class="t-item"><span class="t-sym">HBAR</span> $0.302 <span class="t-up">+7.8%</span></span>
+            <span class="t-item"><span class="t-sym">ETH</span> $2,110 <span class="t-dn">-1.4%</span></span>
+            <span class="t-item"><span class="t-sym">ADA</span> $0.277 <span class="t-up">+5.8%</span></span>
+            <span class="t-item"><span class="t-sym">POL</span> $0.089 <span class="t-dn">-3.2%</span></span>
+            <span class="t-item"><span class="t-sym">XRP</span> $2.716 <span class="t-up">+4.2%</span></span>
+            <span class="t-item"><span class="t-sym">XLM</span> $0.165 <span class="t-dn">-2.1%</span></span>
+            <span class="t-item"><span class="t-sym">HBAR</span> $0.302 <span class="t-up">+7.8%</span></span>
+            <span class="t-item"><span class="t-sym">ETH</span> $2,110 <span class="t-dn">-1.4%</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="db-metrics">
+        <div class="db-metric"><div class="db-metric-lbl">Total Portfolio (USD)</div><div class="db-metric-val grad" id="m-total">$3,008.27</div></div>
+        <div class="db-metric"><div class="db-metric-lbl">Dólar CLP</div><div class="db-metric-val" id="m-dolar">$975.40</div></div>
+        <div class="db-metric"><div class="db-metric-lbl">Valor en Pesos Chilenos</div><div class="db-metric-val" id="m-clp">$2.933.070</div></div>
+      </div>
+      <div class="db-main">
+        <div class="db-section-hdr">
+          <span class="db-section-title">Mi Portfolio · 10 activos</span>
+          <span style="font-size:.7rem;color:var(--text3);font-family:var(--mono)">Actualizado hace 1 min</span>
+        </div>
+        <div id="card-list">
+          <div class="db-card" id="card-xrp">
+            <div class="db-logo-cell">XRP</div>
+            <div><div class="db-name">XRP</div><div class="db-full">XRP Ledger</div></div>
+            <div class="db-price">$2.7161</div>
+            <div class="db-total">$2,190.81</div>
+            <div class="db-chg up">+4.20%</div>
+          </div>
+          <div class="db-card">
+            <div class="db-logo-cell" style="font-size:.7rem">XLM</div>
+            <div><div class="db-name">XLM</div><div class="db-full">Stellar</div></div>
+            <div class="db-price">$0.1653</div>
+            <div class="db-total">$393.33</div>
+            <div class="db-chg dn">-2.10%</div>
+          </div>
+          <div class="db-card">
+            <div class="db-logo-cell" style="font-size:.7rem">HBAR</div>
+            <div><div class="db-name">HBAR</div><div class="db-full">Hedera</div></div>
+            <div class="db-price">$0.3022</div>
+            <div class="db-total">$186.73</div>
+            <div class="db-chg up">+7.37%</div>
+          </div>
+          <div class="db-card">
+            <div class="db-logo-cell" style="font-size:.65rem">ADA</div>
+            <div><div class="db-name">ADA</div><div class="db-full">Cardano</div></div>
+            <div class="db-price">$0.2767</div>
+            <div class="db-total">$54.51</div>
+            <div class="db-chg up">+5.82%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SCENE 4: CARD DETAIL ── -->
+    <div class="scene" id="s4">
+      <div class="db-header">
+        <div class="db-logo">
+          <svg width="32" height="32" viewBox="0 0 100 100" fill="none"><rect x="10" y="60" width="18" height="30" rx="3" fill="#4f91f6"/><rect x="32" y="45" width="18" height="45" rx="3" fill="#4f91f6" opacity=".75"/><rect x="54" y="25" width="18" height="65" rx="3" fill="#4f91f6" opacity=".5"/><rect x="76" y="10" width="18" height="80" rx="3" fill="#12d995"/></svg>
+          <div class="db-logo-txt">Digital Asset Tracker</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.65rem">
+          <button style="background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:8px;padding:.38rem .85rem;font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Calculadora</button>
+          <div style="background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.3);border-radius:7px;padding:.35rem .75rem;font-size:.72rem;font-weight:700;color:var(--green)">carlos.demo</div>
+        </div>
+      </div>
+      <div class="db-metrics">
+        <div class="db-metric"><div class="db-metric-lbl">Total Portfolio (USD)</div><div class="db-metric-val grad">$3,008.27</div></div>
+        <div class="db-metric"><div class="db-metric-lbl">Dólar CLP</div><div class="db-metric-val">$975.40</div></div>
+        <div class="db-metric"><div class="db-metric-lbl">Valor en Pesos Chilenos</div><div class="db-metric-val">$2.933.070</div></div>
+      </div>
+      <div class="db-main">
+        <div class="db-section-hdr"><span class="db-section-title">Mi Portfolio · 10 activos</span></div>
+        <!-- Expanded XRP card -->
+        <div class="db-card-expanded">
+          <div class="db-card-expanded-grid">
+            <div class="db-logo-cell" style="width:44px;height:44px">XRP</div>
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div><div class="db-name" style="font-size:1rem">XRP — XRP Ledger</div><div class="db-full">806.61 unidades en cartera</div></div>
+                <div class="db-chg up" style="font-size:.88rem">+4.20%</div>
+              </div>
+              <div class="db-card-details">
+                <div class="db-detail"><div class="db-detail-lbl">Precio actual</div><div class="db-detail-val">$2.7161 USD</div></div>
+                <div class="db-detail"><div class="db-detail-lbl">Total USD</div><div class="db-detail-val big">$2,190.81</div></div>
+                <div class="db-detail"><div class="db-detail-lbl">Total CLP</div><div class="db-detail-val big">$2.136.115</div></div>
+                <div class="db-detail"><div class="db-detail-lbl">Monedero</div><div class="db-detail-val">209.60</div></div>
+                <div class="db-detail"><div class="db-detail-lbl">Exchange</div><div class="db-detail-val">597.01</div></div>
+                <div class="db-detail"><div class="db-detail-lbl">% del portfolio</div><div class="db-detail-val">72.8%</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="db-card" style="opacity:.5"><div class="db-logo-cell" style="font-size:.7rem">XLM</div><div><div class="db-name">XLM</div><div class="db-full">Stellar</div></div><div class="db-price">$0.1653</div><div class="db-total">$393.33</div><div class="db-chg dn">-2.10%</div></div>
+        <div class="db-card" style="opacity:.5"><div class="db-logo-cell" style="font-size:.7rem">HBAR</div><div><div class="db-name">HBAR</div><div class="db-full">Hedera</div></div><div class="db-price">$0.3022</div><div class="db-total">$186.73</div><div class="db-chg up">+7.37%</div></div>
+      </div>
+    </div>
+
+    <!-- ── SCENE 5: CALCULATOR ── -->
+    <div class="scene" id="s5">
+      <div class="db-header">
+        <div class="db-logo"><svg width="32" height="32" viewBox="0 0 100 100" fill="none"><rect x="10" y="60" width="18" height="30" rx="3" fill="#4f91f6"/><rect x="32" y="45" width="18" height="45" rx="3" fill="#4f91f6" opacity=".75"/><rect x="54" y="25" width="18" height="65" rx="3" fill="#4f91f6" opacity=".5"/><rect x="76" y="10" width="18" height="80" rx="3" fill="#12d995"/></svg><div class="db-logo-txt">Digital Asset Tracker</div></div>
+      </div>
+      <div class="calc-overlay">
+        <div class="calc-modal">
+          <div class="calc-header">
+            <div style="font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:.5rem">🇨🇱 Calculadora Tributaria · Legislación Chile 2025</div>
+            <button style="background:var(--surf2);border:1px solid var(--brd);border-radius:7px;color:var(--text2);cursor:pointer;font-size:.8rem;padding:.3rem .65rem">✕ Cerrar</button>
+          </div>
+          <div class="calc-tabs">
+            <button class="ctab active">Ganancia de Capital</button>
+            <button class="ctab">Minería / Staking</button>
+            <button class="ctab">Portfolio Anual</button>
+          </div>
+          <div class="calc-body">
+            <div class="calc-alert"><strong>Art. 17 N°8 LIR + Circular SII 31/2021:</strong> La ganancia neta anual consolidada de todos los activos se suma en el F22. Las pérdidas compensan las ganancias.</div>
+            <div class="calc-grid">
+              <div class="cf"><div class="cf-label">Otros ingresos anuales (CLP)</div><input class="cf-input" value="18.000.000" readonly></div>
+              <div class="cf"><div class="cf-label">Ajuste IPC período (%)</div><input class="cf-input" value="4.5" readonly></div>
+              <div class="cf"><div class="cf-label">UTM vigente (CLP)</div><input class="cf-input" value="67.294" readonly></div>
+              <div class="cf"><div class="cf-label">Tipo contribuyente</div><input class="cf-input" value="Persona Natural (IGC)" readonly></div>
+            </div>
+            <table class="gain-tbl">
+              <thead><tr><th>Moneda</th><th>Cantidad total</th><th>Qty vendida</th><th>P. compra (USD)</th><th>P. venta (USD)</th><th>Ganancia/Pérdida</th></tr></thead>
+              <tbody>
+                <tr><td class="gsym">XRP</td><td style="font-family:var(--mono);font-size:.8rem">806.61</td><td><input value="400" id="xrp-sold" readonly></td><td><input value="0.52" id="xrp-buy" readonly></td><td><input value="2.72" id="xrp-sell" class="focus" readonly></td><td style="font-family:var(--mono);font-weight:700;color:var(--green)" id="xrp-result">—</td></tr>
+                <tr><td class="gsym">XLM</td><td style="font-family:var(--mono);font-size:.8rem">2,379.67</td><td><input value="1000" readonly></td><td><input value="0.08" readonly></td><td><input value="0.165" readonly></td><td style="font-family:var(--mono);font-weight:700;color:var(--green)">+$85.00</td></tr>
+                <tr><td class="gsym">ETH</td><td style="font-family:var(--mono);font-size:.8rem">0.018</td><td><input value="0.018" readonly></td><td><input value="1800" readonly></td><td><input value="2110" readonly></td><td style="font-family:var(--mono);font-weight:700;color:var(--green)">+$5.58</td></tr>
+              </tbody>
+            </table>
+            <button class="calc-run-btn" id="calc-run-btn">Calcular Impuesto Consolidado</button>
+            <div class="result-box" id="result-box" style="display:none">
+              <div style="font-size:.8rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.85rem">Resultado del Cálculo IGC</div>
+              <div class="result-grid">
+                <div class="r-card gain-card"><div class="r-lbl">Ganancia neta (USD)</div><div class="r-val green">+$937.66</div></div>
+                <div class="r-card gain-card"><div class="r-lbl">Ganancia neta (CLP)</div><div class="r-val green">$914.720</div></div>
+                <div class="r-card tax-card"><div class="r-lbl">IGC estimado</div><div class="r-val blue">$86.250</div></div>
+              </div>
+              <div style="font-size:.72rem;color:var(--text3);line-height:1.6;margin-top:.5rem">Tramo efectivo: 4° tramo IGC (13.5%) · Tasa efectiva sobre ganancia: 9.4% · Declaración F22 abril 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SCENE 6: PDF ── -->
+    <div class="scene" id="s6" style="overflow-y:auto;padding:1.5rem 2rem">
+      <div style="text-align:center;margin-bottom:1.25rem">
+        <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(18,217,149,.1);border:1px solid rgba(18,217,149,.25);border-radius:10px;padding:.5rem 1.25rem;font-size:.78rem;font-weight:700;color:var(--green)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Reporte PDF generado exitosamente
+        </div>
+      </div>
+      <div class="pdf-preview">
+        <div class="pdf-hdr">
+          <div>
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none" style="vertical-align:middle;margin-right:.5rem"><rect x="10" y="60" width="18" height="30" rx="3" fill="#4f91f6"/><rect x="32" y="45" width="18" height="45" rx="3" fill="#4f91f6" opacity=".75"/><rect x="54" y="25" width="18" height="65" rx="3" fill="#4f91f6" opacity=".5"/><rect x="76" y="10" width="18" height="80" rx="3" fill="#12d995"/></svg>
+            <span class="pdf-brand">Digital Asset Tracker</span>
+            <div style="font-size:.62rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px;margin-top:.2rem">Portfolio Analytics · Chile</div>
+          </div>
+          <div class="pdf-meta"><strong style="font-size:.88rem;color:#0f172a;display:block">Reporte Tributario</strong>Ganancia de Capital<br>07 de marzo, 2026 · 14:32</div>
+        </div>
+        <div class="pdf-r-grid">
+          <div class="pdf-r g"><div class="pdf-r-lbl">Ganancia neta (USD)</div><div class="pdf-r-val" style="color:#059669">+$937.66</div></div>
+          <div class="pdf-r g"><div class="pdf-r-lbl">Ganancia neta (CLP)</div><div class="pdf-r-val" style="color:#059669">$914.720</div></div>
+          <div class="pdf-r t"><div class="pdf-r-lbl">IGC estimado</div><div class="pdf-r-val" style="color:#2563eb">$86.250</div></div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:.75rem;margin-bottom:.85rem">
+          <thead><tr style="background:#f1f5f9"><th style="padding:.5rem .75rem;text-align:left;color:#475569;font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #e2e8f0">Tramo IGC</th><th style="padding:.5rem .75rem;text-align:left;color:#475569;font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #e2e8f0">Tasa</th><th style="padding:.5rem .75rem;text-align:left;color:#475569;font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #e2e8f0">Base afecta</th><th style="padding:.5rem .75rem;text-align:left;color:#475569;font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #e2e8f0">Impuesto</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:.45rem .75rem;border-bottom:1px solid #f1f5f9;color:#334155">0 – 13.5 UTA</td><td>0%</td><td>$13.500.000</td><td>$0</td></tr>
+            <tr style="background:#eff6ff;font-weight:700"><td style="padding:.45rem .75rem;border-bottom:1px solid #f1f5f9;color:#1e40af">13.5 – 30 UTA</td><td>13.5%</td><td>$914.720</td><td>$86.250</td></tr>
+          </tbody>
+        </table>
+        <div class="pdf-disclaimer"><strong>⚠️ Aviso Legal:</strong> Estimación referencial bajo Ley N° 824, Ley 21.420 y Circular SII N° 31/2021. No sustituye asesoría tributaria profesional. Consulte a un contador auditor para su F22.</div>
+      </div>
+    </div>
+
+  </div><!-- /scene-wrap -->
+
+  <!-- CAPTION BAR -->
+  <div id="caption-bar">
+    <div id="caption-text">Bienvenido a <span class="highlight">Digital Asset Tracker</span></div>
+    <div id="demo-controls">
+      <span id="scene-counter">1 / 6</span>
+      <button class="ctrl-btn" onclick="prevScene()">← Anterior</button>
+      <button class="ctrl-btn" onclick="nextScene()">Siguiente →</button>
+      <button class="ctrl-btn primary" onclick="window.close ? window.close() : (document.getElementById('demo-shell').style.display='none')" id="cta-final" style="display:none">🚀 Crear cuenta</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── WAVE ANIMATION (scene 1) ──
+(function(){
+  const cv=document.getElementById('wave-canvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  let W,H,t=0;
+  const WAVES=[
+    {amp:.13,freq:.007,speed:.016,phase:0,color:'79,145,246',lw:1.8},
+    {amp:.08,freq:.011,speed:.024,phase:1.8,color:'18,217,149',lw:1.3},
+    {amp:.06,freq:.005,speed:.012,phase:3.5,color:'99,60,220',lw:1.1},
+    {amp:.05,freq:.015,speed:.030,phase:0.9,color:'245,166,35',lw:.9},
+  ];
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    ctx.fillStyle='rgba(6,13,28,.12)';ctx.fillRect(0,0,W,H);
+    t++;
+    WAVES.forEach((w,wi)=>{
+      ctx.beginPath();
+      for(let x=0;x<=W;x+=3){
+        const y=H*(.4+wi*.055)+H*w.amp*Math.sin(x*w.freq+t*w.speed+w.phase)+H*w.amp*.3*Math.sin(x*w.freq*2.1+t*w.speed*1.6+wi*.7);
+        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();
+      ctx.fillStyle=`rgba(${w.color},.03)`;ctx.fill();
+      ctx.beginPath();
+      for(let x=0;x<=W;x+=3){
+        const y=H*(.4+wi*.055)+H*w.amp*Math.sin(x*w.freq+t*w.speed+w.phase)+H*w.amp*.3*Math.sin(x*w.freq*2.1+t*w.speed*1.6+wi*.7);
+        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      const g=ctx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,`rgba(${w.color},0)`);
+      g.addColorStop(.2,`rgba(${w.color},.5)`);
+      g.addColorStop(.8,`rgba(${w.color},.5)`);
+      g.addColorStop(1,`rgba(${w.color},0)`);
+      ctx.strokeStyle=g;ctx.lineWidth=w.lw;ctx.stroke();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CURSOR ANIMATION ──
+const cursorEl = document.getElementById('cursor');
+const cursorLabel = document.getElementById('cursor-label');
+let curX = window.innerWidth/2, curY = window.innerHeight/2;
+let curTargetX = curX, curTargetY = curY;
+
+function moveCursorTo(x, y, duration=800, label=''){
+  return new Promise(resolve=>{
+    const startX=curX, startY=curY;
+    const start=performance.now();
+    cursorLabel.textContent=label;
+    cursorLabel.classList.toggle('show',!!label);
+    function step(now){
+      const t=Math.min(1,(now-start)/duration);
+      const ease=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+      curX=startX+(x-startX)*ease;
+      curY=startY+(y-startY)*ease;
+      cursorEl.style.left=curX+'px';
+      cursorEl.style.top=curY+'px';
+      cursorLabel.style.left=curX+'px';
+      cursorLabel.style.top=curY+'px';
+      if(t<1)requestAnimationFrame(step);
+      else{cursorLabel.classList.remove('show');resolve();}
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+function clickCursor(){
+  return new Promise(resolve=>{
+    cursorEl.classList.add('clicking');
+    setTimeout(()=>{cursorEl.classList.remove('clicking');resolve();},300);
+  });
+}
+
+function typeInto(el, text, speed=80){
+  return new Promise(resolve=>{
+    cursorEl.classList.add('typing');
+    let i=0;
+    el.value='';
+    function next(){
+      if(i>=text.length){cursorEl.classList.remove('typing');resolve();return;}
+      el.value+=text[i++];
+      setTimeout(next, speed+(Math.random()*40-20));
+    }
+    next();
+  });
+}
+
+function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+
+function getCenter(el){
+  const r=el.getBoundingClientRect();
+  return{x:r.left+r.width/2, y:r.top+r.height/2};
+}
+
+function highlightEl(el, padding=8){
+  const r=el.getBoundingClientRect();
+  const h=document.getElementById('highlight');
+  h.style.left=(r.left-padding)+'px';
+  h.style.top=(r.top-padding)+'px';
+  h.style.width=(r.width+padding*2)+'px';
+  h.style.height=(r.height+padding*2)+'px';
+  h.classList.add('show');
+}
+function clearHighlight(){document.getElementById('highlight').classList.remove('show');}
+
+// ── SCENES ──
+const SCENES = [
+  {id:'s1', label:'1 / 6'},
+  {id:'s2', label:'2 / 6'},
+  {id:'s3', label:'3 / 6'},
+  {id:'s4', label:'4 / 6'},
+  {id:'s5', label:'5 / 6'},
+  {id:'s6', label:'6 / 6'},
+];
+
+const CAPTIONS = [
+  `Bienvenido a <span class="highlight">Digital Asset Tracker</span> — la plataforma de portfolio cripto diseñada para <span class="blue">Chile</span>.`,
+  `Crear una cuenta es <span class="highlight">gratis</span> y toma menos de 30 segundos. Solo necesitas tu correo y contraseña.`,
+  `Tu <span class="highlight">dashboard</span> muestra todos tus activos en tiempo real — precio en USD y su equivalente en <span class="blue">pesos chilenos</span>.`,
+  `Haz clic en cualquier activo para ver el <span class="highlight">detalle completo</span>: distribución entre monedero y exchange, porcentaje del portfolio y más.`,
+  `La <span class="highlight">Calculadora Tributaria</span> calcula tu IGC según legislación SII 2025 — ingresa compra, venta y el sistema hace todo.`,
+  `Exporta un <span class="highlight">informe PDF</span> listo para tu contador, con tramos IGC, tasa efectiva y aviso legal incluido. Listo para el F22.`,
+];
+
+let currentScene = 0;
+let animRunning = false;
+let animTimeout = null;
+
+function showScene(idx){
+  document.querySelectorAll('.scene').forEach((s,i)=>{
+    s.classList.toggle('active', i===idx);
+  });
+  document.getElementById('caption-text').innerHTML = CAPTIONS[idx];
+  document.getElementById('scene-counter').textContent = SCENES[idx].label;
+  const fill = ((idx+1)/SCENES.length*100);
+  document.getElementById('progress-fill').style.width = fill+'%';
+  document.getElementById('cta-final').style.display = idx===SCENES.length-1?'flex':'none';
+  clearHighlight();
+}
+
+function nextScene(){
+  clearTimeout(animTimeout);
+  if(currentScene < SCENES.length-1){
+    currentScene++;
+    showScene(currentScene);
+    runSceneAnim(currentScene);
+  }
+}
+function prevScene(){
+  clearTimeout(animTimeout);
+  if(currentScene>0){
+    currentScene--;
+    showScene(currentScene);
+  }
+}
+
+async function runSceneAnim(idx){
+  await wait(600);
+  if(idx===0){
+    // Move to "Ver demo" button
+    const btn=document.getElementById('s1-cta1');
+    if(!btn)return;
+    const c=getCenter(btn);
+    await moveCursorTo(c.x, c.y, 1000,'Comenzar gratis');
+    highlightEl(btn);
+    await clickCursor();
+    await wait(800);
+    clearHighlight();
+    // Then move to demo btn
+    const dbtn=document.getElementById('s1-demo');
+    const dc=getCenter(dbtn);
+    await moveCursorTo(dc.x,dc.y,900,'Ver demo');
+    highlightEl(dbtn);
+    await clickCursor();
+    animTimeout=setTimeout(nextScene,1200);
+  }
+  else if(idx===1){
+    // Type email
+    const emailEl=document.getElementById('demo-email');
+    emailEl.classList.add('focus');
+    const ec=getCenter(emailEl);
+    await moveCursorTo(ec.x,ec.y,700);
+    await clickCursor();
+    await typeInto(emailEl,'carlos@demo.cl',90);
+    emailEl.classList.remove('focus');
+    // Password
+    const passEl=document.getElementById('demo-pass');
+    passEl.classList.add('focus');
+    const pc=getCenter(passEl);
+    await moveCursorTo(pc.x,pc.y,600);
+    await clickCursor();
+    await typeInto(passEl,'••••••••',100);
+    passEl.classList.remove('focus');
+    await wait(400);
+    animTimeout=setTimeout(nextScene,1000);
+  }
+  else if(idx===2){
+    // Highlight metrics one by one
+    await wait(400);
+    const m1=document.getElementById('m-total');
+    highlightEl(m1,6);
+    await wait(1000);
+    const m2=document.getElementById('m-dolar');
+    highlightEl(m2,6);
+    await wait(1000);
+    const m3=document.getElementById('m-clp');
+    highlightEl(m3,6);
+    await wait(1000);
+    clearHighlight();
+    // Move cursor to XRP card
+    const card=document.getElementById('card-xrp');
+    card.classList.add('hover');
+    const cc=getCenter(card);
+    await moveCursorTo(cc.x,cc.y,900,'Ver detalle');
+    await wait(600);
+    animTimeout=setTimeout(nextScene,800);
+  }
+  else if(idx===3){
+    await wait(500);
+    // Highlight expanded sections
+    const details=document.querySelector('.db-card-details');
+    if(details){
+      highlightEl(details,8);
+      await wait(1500);
+      clearHighlight();
+    }
+    animTimeout=setTimeout(nextScene,1200);
+  }
+  else if(idx===4){
+    await wait(800);
+    // Highlight XRP row
+    const row=document.querySelector('.gain-tbl tbody tr:first-child');
+    if(row){highlightEl(row,4);await wait(1200);clearHighlight();}
+    // Animate result
+    const runBtn=document.getElementById('calc-run-btn');
+    if(runBtn){
+      const rc=getCenter(runBtn);
+      await moveCursorTo(rc.x,rc.y,900,'Calcular');
+      highlightEl(runBtn,4);
+      await clickCursor();
+      // Show result
+      await wait(500);
+      document.getElementById('xrp-result').textContent='+$846.08';
+      const resBox=document.getElementById('result-box');
+      resBox.style.display='block';
+      resBox.style.opacity='0';
+      resBox.style.transition='opacity .5s';
+      setTimeout(()=>{resBox.style.opacity='1';},50);
+      clearHighlight();
+      await wait(1500);
+      highlightEl(resBox,8);
+      await wait(1500);
+    }
+    clearHighlight();
+    animTimeout=setTimeout(nextScene,800);
+  }
+  else if(idx===5){
+    await wait(600);
+    const pdf=document.querySelector('.pdf-preview');
+    if(pdf){highlightEl(pdf,12);await wait(1800);clearHighlight();}
+    const disc=document.querySelector('.pdf-disclaimer');
+    if(disc){highlightEl(disc,4);await wait(1200);clearHighlight();}
+  }
+}
+
+function startDemo(){
+  document.getElementById('intro').classList.add('out');
+  setTimeout(()=>{
+    document.getElementById('intro').style.display='none';
+    // Place cursor at center
+    curX=window.innerWidth/2; curY=window.innerHeight*0.4;
+    cursorEl.style.left=curX+'px';
+    cursorEl.style.top=curY+'px';
+    cursorEl.style.opacity='1';
+    showScene(0);
+    runSceneAnim(0);
+  },800);
+}
+
+// Auto-advance every 7s if no interaction
+function scheduleAuto(){
+  clearTimeout(animTimeout);
+  animTimeout=setTimeout(()=>{
+    if(currentScene<SCENES.length-1)nextScene();
+  },7000);
+}
+
+// Keyboard nav
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ')nextScene();
+  if(e.key==='ArrowLeft')prevScene();
+});
+</script>
+</body>
+</html>
