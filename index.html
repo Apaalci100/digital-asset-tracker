@@ -1,1 +1,1543 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAAAIADCAAAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAIlJREFUeJxjZIACXkHx/wxEgs/vXzLC2IykakY3iIkczeqHmhhgFjORqxlGE22AXuH9hdjEiTIAphmbISR7gWgD9ArvXybbAJhmYgxBMUCv8D4xlmI3AKaZVENoF4hEG4CcMUgFcL28guL/eQXF/1s3ffuPxL4EY0P5C2Bsk8sz/8PyENx2crMzAJQJQFhW4XarAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAyElEQVR4nGNkwAJ4BcX/YxOnFHx+/5IRXQxFgFYW43MIE70tR7eLid6WozuCiZBCagD1Q00oNDJgorXv0S1F5vMKiv+nSwjgA6MOoJoD9ArvL0Sm6eoAdEtJccTwiYKR4wC9wvuXkWm6OgDdUmo4YuhFAV0coFd4H4WmqwPQLaW1IwZnFIw6YNQBI8sB2LpL9AKf379kxAiBS/2KOPmX+hV10eR0oXQ8mjicf9OuDsU8GB/mcbjv6d07wnAAvRyBHuVY45+e3XMA0z9Oivhv8KkAAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAEZklEQVR4nO3cvXHbShiGUUjjVIEixYwcmSW4FdfABhy4AdbgVlwCHTlirEiBCtANru2hJfEHwO4CfHFOTIAbPPz0EaPhTTcTd/cPL1OfgeGenx5vpj5D13XdJIcQb76pAm/2piJerpZxV38jIXOodtzVbi5kTqkVdvGbCpk+Sodd7GZCZqiSURe5kZgpoUTYt2NvIGZKKdHS4E+EkKlp6LQeNKHFTG1DG+sdtJhpZUhrvYIWM631be7ioMXMVPq0d1HQYmZqlzY4+rEdzMnZoE1n5uKSFk8GLWbm5lyTR4MWM3N1qk07NFHeDdp0Zu6ONWpCE+VN0KYz1+K9Vj9McRCu08cf33pf8+vz1wonOe6fCW06c8yQmMdcd6nXzdqhOWtslLWjPvQ3aNOZ95SKsWbUh+2a0BxVOsIWk1rQRLntOusG1+9PwyY0UQRNFEETRdBEufWFkBR39w8vJjRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRPFT4HN1Hqz/973mt129aXGWa6JCT1DQ2Iec10SQc/M2CiXHrWgZ6RUjEuOWtAzUTrCpUYtaKIImiiCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImiqCJImiiCJoofgrst/Vm/7PvNbvt6lONszCcCd0Ni3nMddSz+KDHRinqeVl00KViFPV8LDbo0hGKeh4WGzSZBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE2WS3+VYb/a9r9ltVxVOQprmE3pIzGOuY1maBj02SlFzTrOgS8Uoak5pEnTpCEXNMZ5yEEXQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNlNvnp8ebqQ8BJTw/Pd6Y0EQRNFEETZTbrvt/95j6IDDGn4ZNaKIImih/g76mtWO3XU19hDd229Wnqc9waLddfZn6DK/9+vy1yn0P220yoQV43pICrKnZylEq6pIfjlJRF7xPkahLfjhKRd3qw/FP0LXXjrEx1pj0Y2MsPenHxlhj0o+NsWbMr5t9E/Dd/cNLtXf/bb3Z93p9i5Vlvdn/7PP62ivLerP/3uf1LVaWjz++9Xp9i6l8NuiuaxM1jPXeRuGxHVHeDfqaHuGxTMcaPTqhRc1cnWrTykGUk0Gb0szNuSbPTmhRMxeXtGjl4CpcOlgvCtqU5lpcPKFFzVT6tNdr5RA1rfVtrvcOLWpaGdLa4Dj9vwe1jBmao6etsClp7AYw+rGdFYRSSrRULEaTmqFKDsXi01XY9FH6L3y1dUHYnFJrVa2+/wqbQ7W/czX7Qifs5Wr54GCSJxTizjfV06/ZPHIT+XWby+Pb/wDJWTzuBpstnQAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAErUlEQVR4nO3cvXnTUACGUScPbYpUqV1R4RFYhRm8AAULeAZWYQRTUblOlSIDhII/J9iJJd0fy985vRIV36srmzxcLc7Mze3dU+97oJ7Hh/ur3vewr+vNGDu9g2j+y42eY3rE0OwXGj5DtIqh+i8xfKaoHUK1H274lFQrhOI/1PCpqXQI1yV/mPFTW+mNFanJ8OmhxGkw+QQwfnopsb1JARg/vU3d4OgAjJ9zMWWLowIwfs7N2E0ODsD4OVdjtjkoAOPn3A3d6MkBGD9zMWSrJwVg/MzNqZt9MwDjZ65O2W7RP4WAuXk1AE9/5u6tDR8NwPi5FK9t2SsQ0Q4G4OnPpTm2aScA0f4LwNOfS3Vo2+963AiX6/23L6Ou+/Hxc+E7Oc2zE8DTnynGjn/qtUO83LjPABRRYsCtItj3NwBPf8YqOdwWEexv3QnAJDUG2/IkEADRrhcLrz/k+bN5JwDRBEA0ARBNAES79gGYVDe3d09OAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiOb/Bp2h1Xr3dcx1283yU+l7mTsnwMyMHf/Uay+VAGakxIBF8JwAZqLkcEXwjwBmoMZgRfCLAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCa/xz3iNV6933MddvN8kPpe6EeJ8ABY8c/9VraE8ALJQYsgvkQwJ6SwxXBPAjgtxqDFcH5EwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0AROv6H2Ot1rtR1203y8J3QqpuJ8DY8U+9FvZ1CaDEgEVACc0DKDlcETBV0wBqDFYETOFbIKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCI9fhwf3X9+HB/1ftGoBcnANEEQDQBEO16sfj1YaD3jUBLfzbvBCCaAIj2N4C5vgZtN8vet3DUdrP80Psejtlulp9638MxPz5+rvrz97fe9AQw1nGSx1pb81egkhGUDqpkBKWDKhlB6aBKRtA6qGcBtHoNKjHcWqdJieHWOk1KDLfWaVJiuC3G/3Lj/w3+5vbuqfpd/LZa7wZf0+o1arXefR96TavXqNV693XoNa1eo95/+zL4mpZP/TcDWCzaRgCtHHrD8TUo0Q4GMNevROGYY5t2AhDtaABOAS7Fa1t+9QQQAXP31oa9AnGxTnmAvxmAU4BLdtIJIALm5tTNnvwKJALmYshWB30GEAHnbuhGB38IFgHnasw2R30LJALOzdhNjv4aVASciylbnPTvACKgt6kbLDJgfz5Na6UevkWf4EKghZJvHkX/FMIrEbWV3li1wToNKKnWw7X6E1sITFH7raLZK4sQGKLV63Tzd3YhcEyPz5BdP7SKgd5fnJzdtzaiuFy9x37IT4wLTQiydOxHAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,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">
+<meta name="theme-color" content="#0d1117">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Asset Tracker · Chile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08111f;--surface:#0d1928;--surface2:#111e30;--border:#1b2d44;
+  --accent:#4f91f6;--accent2:#2d78f0;--green:#12d995;--red:#f25050;--amber:#f5a623;
+  --text:#deeaf8;--text2:#6b8fb5;--text3:#364f68;
+  --sh:0 2px 8px rgba(0,0,0,.35);--shlg:0 12px 40px rgba(0,0,0,.55);--r:12px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;font-size:15px}
 
+/* ── LANDING PAGE ── */
+#landing{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;overflow:auto;background:#060d1c}
+#landing-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#landing>*:not(#landing-canvas){position:relative;z-index:1}
+#landing.hidden{display:none}
+.land-nav{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 3rem;max-width:1200px;margin:0 auto;width:100%}
+.land-logo{display:flex;align-items:center;gap:.85rem}
+.land-logo svg{width:44px;height:44px}
+.land-logo-name{font-size:1.3rem;font-weight:800;color:#fff;line-height:1.15}
+.land-logo-sub{font-size:.62rem;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:1.2px;text-transform:uppercase}
+.land-nav-btns{display:flex;gap:.75rem}
+.land-btn-ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:9px;padding:.55rem 1.4rem;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.land-btn-ghost:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)}
+.land-btn-solid{background:linear-gradient(135deg,#3b82f6,#2563eb);border:none;color:#fff;border-radius:9px;padding:.55rem 1.4rem;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;box-shadow:0 4px 14px rgba(59,130,246,.4)}
+.land-btn-solid:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(59,130,246,.5)}
+.land-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;max-width:800px;margin:0 auto;width:100%}
+.land-tag{display:inline-flex;align-items:center;gap:.45rem;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);color:#93c5fd;border-radius:20px;padding:.35rem 1rem;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:1.75rem}
+.land-h1{font-size:3.2rem;font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem}
+.land-h1 span{background:linear-gradient(135deg,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.land-sub{font-size:1.1rem;color:rgba(255,255,255,.65);line-height:1.7;max-width:560px;margin:0 auto 2.5rem}
+.land-cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.land-cta-primary{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;border:none;border-radius:12px;padding:.85rem 2.2rem;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;box-shadow:0 6px 20px rgba(59,130,246,.45)}
+.land-cta-primary:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(59,130,246,.55)}
+.land-cta-secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:12px;padding:.85rem 2.2rem;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.land-cta-secondary:hover{background:rgba(255,255,255,.15)}
+.land-features{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:900px;margin:0 auto;width:100%;padding:0 2rem 4rem}
+.land-feat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.5rem;text-align:left;transition:.2s}
+.land-feat:hover{background:rgba(255,255,255,.09);border-color:rgba(59,130,246,.4)}
+.land-feat-icon{font-size:1.75rem;margin-bottom:.75rem}
+.land-feat-title{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+.land-feat-desc{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6}
+.land-footer{text-align:center;padding:1.5rem;font-size:.72rem;color:rgba(255,255,255,.3);border-top:1px solid rgba(255,255,255,.07)}
+
+/* ── HEADER sticky ── */
+.header{background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--sh);position:sticky;top:0;z-index:300}
+.header-row1{max-width:1280px;margin:0 auto;padding:1.1rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:.85rem}
+.logo svg{width:46px;height:46px;flex-shrink:0}
+.logo-name{font-size:1.3rem;font-weight:800;line-height:1.15}
+.logo-sub{font-size:.63rem;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:.1rem}
+.header-right{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:.35rem;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.4rem .8rem;font-size:.73rem;font-weight:600;color:var(--text2);white-space:nowrap}
+.theme-btn{display:flex;align-items:center;gap:.35rem;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.4rem .85rem;cursor:pointer;font-size:.73rem;font-weight:600;color:var(--text2);transition:.2s;font-family:inherit}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+.theme-btn svg{width:14px;height:14px}
+
+/* METRICS ROW */
+.metrics-row{max-width:1280px;margin:0 auto;padding:.6rem 1.75rem .85rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.85rem 1.25rem;box-shadow:var(--sh)}
+.metric-label{font-size:.68rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.25rem}
+.metric-row{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
+.metric-val{font-family:'JetBrains Mono',monospace;font-size:1.35rem;font-weight:700}
+.metric-val.grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.metric-sub{font-size:.68rem;color:var(--text3);margin-top:.15rem}
+.pos{color:var(--green)}.neg{color:var(--red)}.neu{color:var(--text3)}
+
+/* DOTS */
+@keyframes pg{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.7)}60%{box-shadow:0 0 0 5px rgba(16,185,129,0)}}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;transition:background .3s}
+.dot.on{background:var(--green);animation:pg 1.8s ease-in-out infinite}
+.dot.err{background:var(--red)}
+
+/* TICKER — sticky */
+.ticker{background:#060d18;border-bottom:1px solid var(--border);height:44px;overflow:hidden;display:flex;align-items:center;position:relative;z-index:1}
+.ticker-tag{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-size:.7rem;font-weight:800;padding:0 1.1rem;height:100%;display:flex;align-items:center;letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0}
+.ticker-track{overflow:hidden;flex:1}
+.ticker-inner{display:flex;white-space:nowrap;align-items:center;animation:scroll 85s linear infinite}
+.ticker-inner:hover{animation-play-state:paused}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.t-item{display:inline-flex;align-items:center;gap:.35rem;padding:0 1.3rem;font-size:.82rem;font-weight:500;color:var(--text3);border-right:1px solid #111e30}
+.t-sym{color:var(--text2);font-weight:700;font-family:'JetBrains Mono',monospace}
+.t-num{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red)}
+.t-num.up{color:var(--green)}
+
+/* MAIN */
+.main{max-width:1280px;margin:0 auto;padding:1.25rem 1.75rem 3rem}
+
+/* ── TWO-COLUMN TOP SECTION ── */
+.top-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.25rem}
+.top-cols-center{grid-column:2}
+
+/* SEARCH */
+.search-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.25rem;box-shadow:var(--sh);display:flex;flex-direction:column}
+.panel-title{font-size:.68rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
+.search-input{width:100%;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:500;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--accent)}
+.search-input::placeholder{color:var(--text3)}
+.search-results{margin-top:.6rem;display:flex;flex-direction:column;gap:.3rem;max-height:240px;overflow-y:auto}
+.search-result{display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;transition:.15s}
+.search-result:hover{border-color:var(--accent);background:var(--surface)}
+.sr-img{width:30px;height:30px;border-radius:50%;object-fit:contain;background:var(--surface);border:1px solid var(--border);padding:2px;flex-shrink:0}
+.sr-name{font-size:.82rem;font-weight:600;color:var(--text)}
+.sr-sym{font-size:.65rem;font-weight:600;color:var(--text3);text-transform:uppercase}
+.sr-ok{font-size:.6rem;font-weight:700;padding:.14rem .4rem;border-radius:4px;background:rgba(16,185,129,.12);color:var(--green);margin-left:.3rem}
+.search-msg{font-size:.75rem;color:var(--text3);text-align:center;padding:.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sp{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
+
+/* ── GAIN TABLE ── */
+.gain-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
+.gain-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.gain-table thead{background:var(--surface2)}
+.gain-table th{padding:.7rem .85rem;text-align:left;font-size:.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);white-space:nowrap}
+.gain-table td{padding:.6rem .85rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.gain-table tbody tr:last-child td{border-bottom:none}
+.gain-table tbody tr:hover{background:var(--surface2)}
+.gain-sym{font-weight:700;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.gain-qty{font-family:'JetBrains Mono',monospace;color:var(--text2);font-size:.78rem}
+.gain-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:.45rem .6rem;font-size:.88rem;color:var(--text);font-family:'JetBrains Mono',monospace;outline:none;transition:border-color .15s;min-width:95px}
+.gain-input:focus{border-color:var(--accent)}
+.gain-input::placeholder{color:var(--text3)}
+.gain-result-cell{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;white-space:nowrap}
+.gain-result-cell.pos{color:var(--green)}
+.gain-result-cell.neg{color:var(--red)}
+.gain-result-cell.neu{color:var(--text3)}
+
+/* ── CALC MODAL ── */
+.calc-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.calc-modal-overlay.open{opacity:1;pointer-events:all}
+.calc-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:min(860px,96vw);max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.6);display:flex;flex-direction:column;transform:translateY(20px);transition:transform .25s}
+.calc-modal-overlay.open .calc-modal{transform:translateY(0)}
+.calc-modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1;flex-shrink:0}
+.calc-modal-title{font-size:1rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.calc-modal-close{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:.85rem;padding:.35rem .7rem;transition:.15s}
+.calc-modal-close:hover{border-color:var(--red);color:var(--red)}
+.calc-modal-body{padding:1.5rem 2rem 2rem;flex:1}
+.calc-open-btn{display:flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:8px;padding:.4rem .9rem;font-size:.73rem;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;white-space:nowrap}
+.calc-open-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(79,145,246,.35)}
+.calc-open-btn svg{width:13px;height:13px}
+
+/* ── TAX PANEL ── */
+.tax-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.25rem;box-shadow:var(--sh);position:relative;width:100%}
+.tax-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.tax-close-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--text3);transition:.15s;flex-shrink:0;line-height:1}
+.tax-close-btn:hover{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red)}
+.tax-hidden{display:none!important}
+.tax-show-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.95rem 1.25rem;box-shadow:var(--sh);display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:.2s;width:100%;box-sizing:border-box}
+.tax-show-btn:hover{border-color:var(--accent)}
+.tax-show-btn-label{font-size:.78rem;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:.4rem}
+.tax-show-btn-hint{font-size:.65rem;color:var(--text3)}
+.tax-tabs{display:flex;gap:.5rem;margin-bottom:1.1rem;flex-wrap:wrap}
+.ttab{font-size:.8rem;font-weight:700;padding:.45rem 1rem;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);cursor:pointer;font-family:inherit;transition:.15s}
+.ttab:hover{border-color:var(--accent);color:var(--accent)}
+.ttab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tax-tab-content{display:none}.tax-tab-content.show{display:block}
+.tax-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin-bottom:1rem}
+.tax-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.7rem}
+.tf{display:flex;flex-direction:column;gap:.25rem}
+.tf-label{font-size:.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:.3rem}
+.tf-input{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.55rem .75rem;outline:none;transition:border-color .2s;width:100%}
+.tf-input:focus{border-color:var(--accent)}
+.tf-select{font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.55rem .75rem;outline:none;cursor:pointer;width:100%}
+.tf-hint{font-size:.6rem;color:var(--text3);margin-top:.1rem;line-height:1.4}
+.calc-btn-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.75rem}
+.calc-btn{background:linear-gradient(135deg,var(--green),#047857);color:#fff;border:none;border-radius:8px;padding:.5rem 1.2rem;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.calc-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(5,150,105,.35)}
+.pdf-btn{background:linear-gradient(135deg,var(--red),#b91c1c);color:#fff;border:none;border-radius:8px;padding:.5rem 1.2rem;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;display:none}
+.pdf-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(220,38,38,.35)}
+.pdf-btn.show{display:flex;align-items:center;gap:.4rem}
+.tax-result-area{display:none}
+.tax-result-area.show{display:block}
+.tr-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+.tr-card{background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:.6rem .8rem}
+.tr-lbl{font-size:.6rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.3px;margin-bottom:.25rem}
+.tr-val{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700}
+.tr-val.gain{color:var(--green)}.tr-val.loss{color:var(--red)}.tr-val.tax{color:var(--amber)}
+.tr-sub{font-size:.6rem;color:var(--text3);margin-top:.1rem}
+.tr-table{width:100%;border-collapse:collapse;font-size:.7rem;margin-bottom:.65rem}
+.tr-table th{text-align:left;padding:.35rem .55rem;font-size:.6rem;font-weight:700;color:var(--text3);text-transform:uppercase;border-bottom:1px solid var(--border)}
+.tr-table td{padding:.32rem .55rem;border-bottom:1px solid var(--border);color:var(--text2)}
+.tr-table td:last-child{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;color:var(--text)}
+.tr-table tr.active-row td{background:rgba(245,158,11,.07)}
+.tr-table tr.active-row td:last-child{color:var(--amber)}
+.tax-note{font-size:.63rem;color:var(--text3);line-height:1.5;border-top:1px solid var(--border);padding-top:.6rem}
+.tax-alert{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:.85rem 1rem;font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:1rem}
+.tax-alert strong{color:var(--amber)}
+
+/* ── CARDS ── */
+.section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;margin-top:.5rem}
+.section-title{font-size:1.4rem;font-weight:800;color:var(--text)}
+.card-wrap{margin-bottom:.75rem}
+.crypto-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;transition:border-color .2s}
+.crypto-card:hover{border-color:var(--accent)}
+.card-main{display:grid;grid-template-columns:70px 180px 225px 1fr 100px 110px;align-items:stretch;min-height:84px}
+.c-logo{display:flex;align-items:center;justify-content:center;padding:.75rem;border-right:1px solid var(--border)}
+.coin-img{width:44px;height:44px;border-radius:50%;object-fit:contain;border:2px solid var(--border);background:var(--surface2);padding:3px}
+.coin-fb{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#fff}
+.c-name{padding:.75rem 1rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.cn-name{font-size:1.08rem;font-weight:700;line-height:1.2}
+.cn-sym{font-size:.7rem;font-weight:600;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-top:.1rem}
+.cn-chg{font-family:'JetBrains Mono',monospace;font-size:.77rem;font-weight:600;margin-top:.25rem}
+.c-qty{padding:.75rem 1rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:.3rem}
+.qty-label{font-size:.66rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.qty-input{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.45rem .75rem;width:100%;outline:none;transition:border-color .2s}
+.qty-input:focus{border-color:var(--accent)}
+.c-val{padding:.7rem 1rem;border-right:1px solid var(--border);display:flex;align-items:center}
+.val-inner{display:flex;align-items:center;gap:0;width:100%}
+.val-block{display:flex;flex-direction:column;gap:.2rem;flex:1}
+.val-divider{width:1px;background:var(--border);height:36px;margin:0 .9rem;flex-shrink:0}
+.vlbl{font-size:.62rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.vusd{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--text);white-space:nowrap}
+.vclp{font-family:'JetBrains Mono',monospace;font-size:.83rem;font-weight:600;color:var(--text2);white-space:nowrap}
+.c-status{padding:.75rem .7rem;border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem}
+.live-txt{font-size:.62rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.4px}
+.c-chart{padding:.75rem .7rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem}
+.chart-btn{display:flex;align-items:center;gap:.3rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:7px;padding:.42rem .8rem;cursor:pointer;font-size:.7rem;font-weight:700;font-family:inherit;transition:.2s;white-space:nowrap;width:100%;justify-content:center}
+.chart-btn:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(59,130,246,.35)}
+.chart-btn.active{background:linear-gradient(135deg,#6366f1,#4f46e5)}
+.chart-btn svg{width:12px;height:12px;flex-shrink:0}
+.del-btn{font-size:.63rem;font-weight:600;color:var(--text3);background:none;border:none;cursor:pointer;font-family:inherit;padding:.12rem .28rem;border-radius:5px;transition:.15s}
+.del-btn:hover{color:var(--red);background:rgba(239,68,68,.08)}
+
+/* CHART PANEL */
+.chart-panel{display:none;border-top:1px solid var(--border);background:var(--surface2);padding:.9rem 1.1rem}
+.chart-panel.open{display:block}
+.chart-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem;flex-wrap:wrap;gap:.4rem}
+.chart-title2{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.period-btns{display:flex;gap:.3rem}
+.pbtn{font-size:.63rem;font-weight:700;padding:.26rem .58rem;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text3);cursor:pointer;font-family:inherit;transition:.15s}
+.pbtn:hover{border-color:var(--accent);color:var(--accent)}
+.pbtn.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+.chart-wrap{position:relative;width:55%;margin:0 auto;min-width:280px}
+.chart-loading{display:flex;align-items:center;gap:.5rem;justify-content:center;padding:1.5rem;font-size:.78rem;color:var(--text3)}
+
+/* ── MODALS BASE ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:0 24px 64px rgba(0,0,0,.25);width:100%;max-width:460px;overflow:hidden;animation:slideUp .25s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{padding:1.5rem 1.6rem 0;display:flex;align-items:flex-start;justify-content:space-between}
+.modal-title{font-size:1.2rem;font-weight:800;color:var(--text)}
+.modal-sub{font-size:.75rem;color:var(--text3);margin-top:.25rem}
+.modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:.95rem;color:var(--text3);display:flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0}
+.modal-close:hover{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red)}
+.modal-body{padding:1.35rem 1.6rem 1.6rem}
+
+/* AUTH MODAL */
+.auth-tabs{display:flex;gap:.35rem;margin-bottom:1rem;background:var(--surface2);border-radius:8px;padding:.3rem}
+.auth-tab{flex:1;font-size:.78rem;font-weight:700;padding:.42rem;border-radius:6px;border:none;background:none;cursor:pointer;color:var(--text3);font-family:inherit;transition:.2s}
+.auth-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--sh)}
+.auth-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem}
+.auth-label{font-size:.65rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.auth-input{font-family:'Inter',sans-serif;font-size:.9rem;font-weight:500;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;outline:none;transition:border-color .2s;width:100%}
+.auth-input:focus{border-color:var(--accent)}
+.auth-submit{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:9px;padding:.7rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;margin-top:.3rem}
+.auth-submit:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(37,99,235,.4)}
+.auth-submit:disabled{opacity:.6;cursor:wait;transform:none}
+.auth-divider{display:flex;align-items:center;gap:.75rem;margin:.9rem 0;color:var(--text3);font-size:.7rem}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.auth-msg{font-size:.75rem;text-align:center;padding:.45rem;border-radius:6px;margin-top:.5rem}
+.auth-msg.err{background:rgba(220,38,38,.08);color:var(--red)}
+.auth-msg.ok{background:rgba(5,150,105,.08);color:var(--green)}
+
+/* PRO MODAL */
+.modal.modal-pro{max-width:680px}
+.pro-plans{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}
+.pro-plan{border:2px solid var(--border);border-radius:12px;padding:.85rem .75rem;cursor:pointer;transition:.2s;position:relative}
+.pro-plan:hover{border-color:var(--accent);transform:translateY(-2px)}
+.pro-plan.featured{border-color:var(--accent);background:rgba(37,99,235,.04)}
+.pro-plan-badge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:.55rem;font-weight:800;padding:.18rem .6rem;border-radius:20px;white-space:nowrap;letter-spacing:.5px}
+.pro-plan-name{font-size:.68rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem}
+.pro-plan-price{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:800;color:var(--text);line-height:1.1}
+.pro-plan-price-annual{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;color:var(--green);margin-top:.2rem}
+.pro-plan-period{font-size:.6rem;font-weight:500;color:var(--text3)}
+.pro-plan-coins{font-size:.72rem;font-weight:700;color:var(--accent);margin-top:.3rem}
+.pro-plan-features{margin-top:.6rem;display:flex;flex-direction:column;gap:.2rem}
+.pro-feat{font-size:.67rem;color:var(--text2);display:flex;align-items:flex-start;gap:.3rem;line-height:1.4}
+.pro-feat::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;margin-top:.05rem}
+.pro-feat.no{color:var(--text3)}.pro-feat.no::before{content:'✗';color:var(--text3)}
+.pro-cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.65rem}
+.pro-cta{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;padding:.65rem .5rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.pro-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(37,99,235,.4)}
+.pro-cta.gold{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.pro-cta.gold:hover{box-shadow:0 6px 18px rgba(245,158,11,.4)}
+.pro-legal{font-size:.63rem;color:var(--text3);text-align:center;line-height:1.5}
+
+/* LOCK OVERLAY */
+.card-lock{position:absolute;inset:0;background:rgba(8,17,31,.88);backdrop-filter:blur(4px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;z-index:10;border-radius:var(--r)}
+.lock-icon{font-size:1.6rem}
+.lock-msg{font-size:.8rem;font-weight:700;color:var(--text2);text-align:center}
+.lock-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:8px;padding:.45rem 1.1rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+
+/* FREE LIMIT BAR */
+.limit-bar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.8rem 1.1rem;margin-bottom:.85rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;box-shadow:var(--sh)}
+.limit-info{display:flex;flex-direction:column;gap:.2rem}
+.limit-label{font-size:.65rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
+.limit-count{font-size:.88rem;font-weight:700;color:var(--text)}
+.limit-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;max-width:180px}
+.limit-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:3px;transition:width .4s}
+.limit-fill.warn{background:linear-gradient(90deg,var(--amber),var(--red))}
+.upgrade-small-btn{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:7px;padding:.42rem .95rem;font-size:.73rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:.2s}
+.upgrade-small-btn:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(245,158,11,.35)}
+
+/* USER BADGE */
+.user-area{display:flex;align-items:center;gap:.5rem}
+.user-btn{display:flex;align-items:center;gap:.4rem;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.4rem .8rem;cursor:pointer;font-size:.73rem;font-weight:600;color:var(--text2);font-family:inherit;transition:.2s}
+.user-btn:hover{border-color:var(--accent);color:var(--accent)}
+.user-btn.logged{background:rgba(5,150,105,.08);border-color:rgba(5,150,105,.3);color:var(--green)}
+.free-badge{background:var(--surface2);border:1px solid var(--border);color:var(--text3);font-size:.58rem;font-weight:700;padding:.12rem .45rem;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+.pro-badge-tag{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:.58rem;font-weight:800;padding:.12rem .45rem;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+.admin-badge{background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;font-size:.58rem;font-weight:800;padding:.12rem .45rem;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+
+/* BAR ANIM */
+@keyframes riseUp{0%,100%{transform:scaleY(1);transform-origin:bottom}50%{transform:scaleY(1.15);transform-origin:bottom}}
+.b1{animation:riseUp 2.2s ease-in-out infinite 0s}.b2{animation:riseUp 2.2s ease-in-out infinite .15s}
+.b3{animation:riseUp 2.2s ease-in-out infinite .3s}.b4{animation:riseUp 2.2s ease-in-out infinite .45s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .card-main{grid-template-columns:70px 160px 200px 1fr 90px 100px}
+}
+@media(max-width:900px){
+  .top-cols{grid-template-columns:1fr}
+  .card-main{grid-template-columns:56px 1fr 1fr;grid-template-rows:auto auto}
+  .metrics-row{grid-template-columns:1fr 1fr}
+  .tr-cards{grid-template-columns:repeat(2,1fr)}
+  .pro-plans{grid-template-columns:repeat(2,1fr)}
+  .land-features{grid-template-columns:1fr}
+  .land-h1{font-size:2.2rem}
+  .calc-modal{width:98vw;max-height:95vh}
+  .gain-table th,.gain-table td{padding:.4rem .5rem;font-size:.75rem}
+}
+@media(max-width:640px){
+  .header-row1{padding:.75rem 1rem;gap:.5rem}
+  .logo-sub{display:none}
+  .logo svg{width:36px;height:36px}
+  .logo-name{font-size:1.1rem}
+  .badge:first-child{display:none}
+  .metrics-row{grid-template-columns:1fr;padding:.5rem 1rem .65rem;gap:.5rem}
+  .metric{padding:.65rem 1rem}
+  .metric-val{font-size:1.1rem}
+  .ticker{height:36px}
+  .ticker-tag{font-size:.6rem;padding:0 .7rem;letter-spacing:1px}
+  .t-item{font-size:.72rem;padding:0 .85rem}
+  .main{padding:.85rem 1rem 2rem}
+  .top-cols{grid-template-columns:1fr;margin-bottom:.85rem}
+  .card-main{grid-template-columns:48px 1fr 1fr;gap:.5rem}
+  .c-logo{padding:.5rem}
+  .c-logo img,.c-logo-fb{width:32px;height:32px}
+  .calc-modal{width:100vw;max-height:100vh;border-radius:0}
+  .calc-modal-header{padding:1rem}
+  .calc-modal-body{padding:.85rem 1rem 1.25rem}
+  .gain-table-wrap{font-size:.73rem}
+  .gain-input{min-width:72px;padding:.28rem .4rem;font-size:.73rem}
+  .pro-plans{grid-template-columns:1fr}
+  .tr-cards{grid-template-columns:1fr}
+  .section-hdr{padding:.5rem 0}
+  .section-title{font-size:.85rem}
+  .header-right{gap:.4rem}
+  .calc-open-btn{padding:.35rem .65rem;font-size:.68rem}
+  .user-btn{padding:.35rem .65rem;font-size:.68rem}
+  .upgrade-small-btn{padding:.35rem .65rem;font-size:.68rem}
+}
+@media(max-width:380px){
+  .logo-name{font-size:.95rem}
+  .header-right .badge{display:none}
+  .metric-val{font-size:.95rem}
+}
+
+/* ── DEMO MODE ── */
+#demoBanner{position:sticky;top:0;z-index:400;background:linear-gradient(90deg,rgba(18,217,149,.12),rgba(79,145,246,.12));border-bottom:1px solid rgba(18,217,149,.25);padding:.55rem 1.5rem;display:none;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+#demoBanner.show{display:flex}
+.demo-badge{display:flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:800;color:#12d995;text-transform:uppercase;letter-spacing:.8px}
+.demo-badge-dot{width:8px;height:8px;border-radius:50%;background:#12d995;animation:demoPulse 1.4s ease-in-out infinite}
+@keyframes demoPulse{0%,100%{box-shadow:0 0 0 0 rgba(18,217,149,.5)}50%{box-shadow:0 0 0 6px rgba(18,217,149,0)}}
+.demo-msg{font-size:.78rem;color:rgba(255,255,255,.65)}
+.demo-cta-row{display:flex;gap:.5rem;align-items:center}
+.demo-register-btn{background:linear-gradient(135deg,#12d995,#059669);color:#fff;border:none;border-radius:7px;padding:.4rem 1rem;font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.demo-register-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(18,217,149,.35)}
+.demo-exit-btn{background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:.4rem .75rem;font-size:.72rem;cursor:pointer;font-family:inherit;transition:.2s}
+.demo-exit-btn:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25)}
+
+/* Auto-demo prompt on landing */
+#demoPrompt{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%) translateY(20px);z-index:20;display:flex;align-items:center;gap:.65rem;background:rgba(13,25,40,.85);border:1px solid rgba(79,145,246,.35);backdrop-filter:blur(12px);border-radius:14px;padding:.75rem 1.4rem;opacity:0;transition:opacity .6s ease,transform .6s ease;pointer-events:none;white-space:nowrap}
+#demoPrompt.visible{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all}
+.demo-prompt-dot{width:7px;height:7px;border-radius:50%;background:#12d995;flex-shrink:0;animation:demoPulse 1.4s ease-in-out infinite}
+.demo-prompt-text{font-size:.82rem;color:rgba(255,255,255,.8);font-weight:500}
+.demo-prompt-btn{background:linear-gradient(135deg,#4f91f6,#2d78f0);color:#fff;border:none;border-radius:8px;padding:.38rem .95rem;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.demo-prompt-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(79,145,246,.4)}
+.demo-prompt-arrow{font-size:1rem;animation:arrowBounce .9s ease-in-out infinite alternate}
+@keyframes arrowBounce{from{transform:translateX(0)}to{transform:translateX(4px)}}
+
+</style>
+</head>
+<body>
+
+<!-- ══ LANDING PAGE ══ -->
+<div id="landing">
+  <canvas id="landing-canvas"></canvas>
+  <nav class="land-nav">
+    <div class="land-logo">
+      <svg viewBox="0 0 100 100" fill="none" width="44" height="44">
+        <rect class="b1" x="10" y="60" width="18" height="30" rx="3" fill="#3b82f6"/>
+        <rect class="b2" x="32" y="45" width="18" height="45" rx="3" fill="#3b82f6" opacity=".75"/>
+        <rect class="b3" x="54" y="25" width="18" height="65" rx="3" fill="#3b82f6" opacity=".5"/>
+        <rect class="b4" x="76" y="10" width="18" height="80" rx="3" fill="#34d399"/>
+      </svg>
+      <div>
+        <div class="land-logo-name">Digital Asset Tracker</div>
+        <div class="land-logo-sub">Portfolio Analytics · Chile</div>
+      </div>
+    </div>
+    <div class="land-nav-btns">
+      <button class="land-btn-ghost" onclick="openAuth();switchAuth('login')">Ingresar</button>
+      <button class="land-btn-solid" onclick="openAuth();switchAuth('register')">Crear cuenta gratis</button>
+    </div>
+  </nav>
+  <div class="land-hero">
+    <div class="land-tag">🇨🇱 Diseñado para Chile · Legislación SII 2025</div>
+    <h1 class="land-h1">Tu portfolio cripto<br><span>en tiempo real</span></h1>
+    <p class="land-sub">Rastrea tus activos digitales, calcula tus impuestos y genera informes para tu contador — todo en un solo lugar, en pesos chilenos.</p>
+    <div class="land-cta-row">
+      <button class="land-cta-primary" onclick="openAuth();switchAuth('register')">Comenzar gratis</button>
+      <button class="land-cta-secondary" onclick="enterDemo()">Ver demo →</button>
+    </div>
+  </div>
+  <div class="land-features">
+    <div class="land-feat">
+      <div class="land-feat-icon">📡</div>
+      <div class="land-feat-title">Precios en tiempo real</div>
+      <div class="land-feat-desc">Conectado a CoinGecko con actualización automática cada 2 minutos. Conversión instantánea a CLP.</div>
+    </div>
+    <div class="land-feat">
+      <div class="land-feat-icon">🇨🇱</div>
+      <div class="land-feat-title">Calculadora tributaria SII</div>
+      <div class="land-feat-desc">Ganancia de capital, minería, staking y declaración anual. Exporta PDF listo para tu contador.</div>
+    </div>
+    <div class="land-feat">
+      <div class="land-feat-icon">☁️</div>
+      <div class="land-feat-title">Portfolio en la nube</div>
+      <div class="land-feat-desc">Guarda tu portfolio automáticamente. Accede desde cualquier dispositivo en cualquier momento.</div>
+    </div>
+  </div>
+  <div class="land-footer">© 2025 Digital Asset Tracker · hola@digitalassettracker.cl · Todos los derechos reservados</div>
+  <div id="demoPrompt">
+    <span class="demo-prompt-dot"></span>
+    <span class="demo-prompt-text">Explora el dashboard sin registrarte</span>
+    <button class="demo-prompt-btn" onclick="enterDemo()">Ver demo</button>
+    <span class="demo-prompt-arrow">→</span>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="app" style="display:none">
+
+<!-- DEMO BANNER -->
+<div id="demoBanner">
+  <div class="demo-badge"><span class="demo-badge-dot"></span>Modo Demo</div>
+  <div class="demo-msg">Estás viendo datos ficticios. Los precios son reales en tiempo real.</div>
+  <div class="demo-cta-row">
+    <button class="demo-register-btn" onclick="openAuth();switchAuth('register')">🚀 Crear cuenta gratis</button>
+    <button class="demo-exit-btn" onclick="exitDemo()">Salir</button>
+  </div>
+</div>
+
+<!-- HEADER (no sticky) -->
+<header class="header">
+  <div class="header-row1">
+    <div class="logo">
+      <svg viewBox="0 0 100 100" fill="none" width="46" height="46">
+        <rect class="b1" x="10" y="60" width="18" height="30" rx="3" fill="#3b82f6"/>
+        <rect class="b2" x="32" y="45" width="18" height="45" rx="3" fill="#3b82f6" opacity=".75"/>
+        <rect class="b3" x="54" y="25" width="18" height="65" rx="3" fill="#3b82f6" opacity=".5"/>
+        <rect class="b4" x="76" y="10" width="18" height="80" rx="3" fill="#34d399"/>
+      </svg>
+      <div><div class="logo-name">Digital Asset Tracker</div><div class="logo-sub">Portfolio Analytics · Chile</div></div>
+    </div>
+    <div class="header-right">
+      <div class="badge"><span class="dot" id="hDot"></span><span id="hLbl">Conectando…</span></div>
+      <div class="badge" style="font-family:'JetBrains Mono',monospace;font-size:.68rem"><span id="lastUpd">—</span></div>
+      <button class="calc-open-btn" onclick="openCalc()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="17" x2="12" y2="17"/></svg>Calculadora</button>
+        <div class="user-area">
+        <button class="user-btn" id="userBtn" onclick="openAuth()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="userBtnTxt">Ingresar</span>
+        </button>
+        <button class="upgrade-small-btn" id="upgradeHeaderBtn" onclick="openPro()" style="display:none">⚡ Hazte Pro</button>
+      </div>
+    </div>
+  </div>
+  <div class="metrics-row">
+    <div class="metric">
+      <div class="metric-label">Total Portfolio</div>
+      <div class="metric-row"><div class="metric-val grad" id="mTotalUSD">$—</div></div>
+      <div class="metric-sub" id="mTotalCLP">— CLP</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Dólar CLP</div>
+      <div class="metric-row"><div class="metric-val" id="mDolar">—</div><span class="dot" id="dDot"></span></div>
+      <div class="metric-sub" id="dSub">Actualizando…</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Activos · Var. prom. 24h</div>
+      <div class="metric-row"><div class="metric-val" id="mCnt">—</div><div class="metric-val" id="mAvg" style="font-size:.95rem">—</div></div>
+      <div class="metric-sub">criptomonedas rastreadas</div>
+    </div>
+  </div>
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-tag">📡 LIVE</div>
+    <div class="ticker-track"><div class="ticker-inner" id="tickerEl"></div></div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="top-cols">
+    <div></div>
+    <div class="top-cols-center">
+      <div class="search-box">
+        <div class="panel-title">🔍 Agregar criptoactivo</div>
+        <input class="search-input" id="searchIn" type="text" placeholder="Buscar por nombre o símbolo…" autocomplete="off" oninput="onSearch(this.value)">
+        <div class="search-results" id="searchRes">
+          <div class="search-msg">Escribe al menos 2 caracteres para buscar</div>
+        </div>
+      </div>
+    </div>
+    <div></div>
+
+  </div><!-- /top-cols -->
+
+  <!-- CARDS -->
+  <div class="section-hdr">
+    <div class="section-title">Portfolio</div>
+  </div>
+
+  <!-- FREE PLAN LIMIT BAR -->
+  <div class="limit-bar" id="limitBar">
+    <div class="limit-info">
+      <div class="limit-label">Plan Gratuito · Activos</div>
+      <div class="limit-count"><span id="limitUsed">0</span> / 5 activos</div>
+    </div>
+    <div class="limit-track"><div class="limit-fill" id="limitFill" style="width:0%"></div></div>
+    <button class="upgrade-small-btn" onclick="openPro()">⚡ Ampliar a Pro</button>
+  </div>
+
+  <div id="cardList"></div>
+
+</div><!-- /main -->
+
+<!-- ══ CALC MODAL ══ -->
+<div class="calc-modal-overlay" id="calcModal" onclick="handleOverlayClick(event,'calcModal')">
+  <div class="calc-modal">
+    <div class="calc-modal-header">
+      <div class="calc-modal-title">🇨🇱 Calculadora Tributaria · Legislación Chile 2025</div>
+      <button class="calc-modal-close" onclick="closeCalc()">✕ Cerrar</button>
+    </div>
+    <div class="calc-modal-body">
+      <button class="tax-close-btn" onclick="hideTax()" title="Cerrar calculadora">✕</button>
+      </div>
+      <div class="tax-tabs">
+        <button class="ttab active" onclick="setTab('gain')">Ganancia de Capital</button>
+        <button class="ttab" onclick="setTab('mining')">Minería / Staking</button>
+        <button class="ttab" onclick="setTab('portfolio')">Portfolio Anual</button>
+      </div>
+
+      <!-- TAB: GANANCIA DE CAPITAL -->
+      <div class="tax-tab-content show" id="tab-gain">
+        <div class="tax-alert">
+          <strong>Art. 17 N°8 LIR + Circular SII 31/2021:</strong> La ganancia neta anual consolidada de <em>todos</em> los activos se suma en el F22. Las pérdidas de unos compensan las ganancias de otros.
+        </div>
+        <div class="tax-grid" style="margin-bottom:.75rem">
+          <div class="tf"><div class="tf-label">Otros ingresos anuales (CLP)</div><input class="tf-input" id="gOther" type="number" step="any" min="0" placeholder="0" oninput="calcGain()"><div class="tf-hint">Sueldos, honorarios, arriendos, etc.</div></div>
+          <div class="tf"><div class="tf-label">Ajuste IPC período (%)</div><input class="tf-input" id="gIPC" type="number" step="any" min="0" value="4.5" oninput="calcGain()"><div class="tf-hint">Inflación del período</div></div>
+          <div class="tf"><div class="tf-label">UTM vigente (CLP)</div><input class="tf-input" id="gUTM" type="number" value="67294" oninput="calcGain()"></div>
+          <div class="tf"><div class="tf-label">Tipo contribuyente</div><select class="tf-select" id="gType" onchange="calcGain()"><option value="natural">Persona Natural (IGC)</option><option value="empresa">Empresa (IDPC 27%)</option></select></div>
+        </div>
+        <div class="gain-table-wrap">
+          <table class="gain-table">
+            <thead><tr><th>Moneda</th><th>Cantidad total</th><th>Qty vendida</th><th>Precio compra (USD)</th><th>Precio venta (USD)</th><th>Ganancia / Pérdida</th></tr></thead>
+            <tbody id="gainTableBody"></tbody>
+          </table>
+        </div>
+        <div class="calc-btn-row" style="margin-top:1rem">
+          <button class="calc-btn" onclick="calcGain()">Calcular Impuesto Consolidado</button>
+          <button class="pdf-btn" id="pdfBtnGain" onclick="exportPDF('gain')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Exportar PDF</button>
+        </div>
+        <div class="tax-result-area" id="gainResult"></div>
+      </div>
+
+      <!-- TAB: MINERÍA / STAKING -->
+      <div class="tax-tab-content" id="tab-mining">
+        <div class="tax-alert">
+          <strong>Oficio SII 963/2022 + Circular 31/2021:</strong> Ingresos por minería y staking se clasifican como <strong>rentas de actividades del art. 20 N°5 LIR</strong>, afectas a Primera Categoría e IGC. Se declaran en F22. Posibles PPM mensuales si supera límite.
+        </div>
+        <div class="tax-grid">
+          <div class="tf">
+            <div class="tf-label">Moneda obtenida</div>
+            <select class="tf-select" id="mCoin" onchange="fillMiningPrice()"><option value="">— Seleccionar —</option></select>
+          </div>
+          <div class="tf">
+            <div class="tf-label">Actividad</div>
+            <select class="tf-select" id="mActivity">
+              <option value="mining">Minería (PoW)</option>
+              <option value="staking">Staking (PoS)</option>
+              <option value="yield">Yield / Lending</option>
+              <option value="airdrop">Airdrop</option>
+            </select>
+          </div>
+          <div class="tf">
+            <div class="tf-label">Unidades recibidas</div>
+            <input class="tf-input" id="mQty" type="number" step="any" min="0" placeholder="0" oninput="calcMining()">
+          </div>
+          <div class="tf">
+            <div class="tf-label">Precio al momento de recepción (USD)</div>
+            <input class="tf-input" id="mPrice" type="number" step="any" min="0" placeholder="0.00" oninput="calcMining()">
+          </div>
+          <div class="tf">
+            <div class="tf-label">Gastos deducibles (CLP)</div>
+            <input class="tf-input" id="mCosts" type="number" step="any" min="0" placeholder="0">
+            <div class="tf-hint">Electricidad, hardware, etc. (art. 31 LIR)</div>
+          </div>
+          <div class="tf">
+            <div class="tf-label">Otros ingresos anuales (CLP)</div>
+            <input class="tf-input" id="mOther" type="number" step="any" min="0" placeholder="0" oninput="calcMining()">
+          </div>
+        </div>
+        <div class="calc-btn-row">
+          <button class="calc-btn" onclick="calcMining()">Calcular</button>
+          <button class="pdf-btn" id="pdfBtnMining" onclick="exportPDF('mining')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Exportar PDF
+          </button>
+        </div>
+        <div class="tax-result-area" id="miningResult"></div>
+      </div>
+
+      <!-- TAB: PORTFOLIO ANUAL -->
+      <div class="tax-tab-content" id="tab-portfolio">
+        <div class="tax-alert">
+          <strong>Declaración Anual F22:</strong> Consolida todas las operaciones del año. Las pérdidas de un activo compensan ganancias de otros. Considera el estado actual del portfolio para proyectar tu carga tributaria del año en curso.
+        </div>
+        <div class="tax-grid">
+          <div class="tf">
+            <div class="tf-label">Año tributario</div>
+            <select class="tf-select" id="pYear"><option>2025</option><option>2024</option><option>2023</option></select>
+          </div>
+          <div class="tf">
+            <div class="tf-label">Costo total de adquisición (USD)</div>
+            <input class="tf-input" id="pCost" type="number" step="any" min="0" placeholder="0.00" oninput="calcPortfolio()">
+            <div class="tf-hint">Suma total invertida</div>
+          </div>
+          <div class="tf">
+            <div class="tf-label">Valor actual total portfolio (USD)</div>
+            <input class="tf-input" id="pVal" type="number" step="any" min="0" placeholder="Calculado automático" oninput="calcPortfolio()">
+          </div>
+          <div class="tf">
+            <div class="tf-label">Ganancias realizadas año (CLP)</div>
+            <input class="tf-input" id="pRealized" type="number" step="any" min="0" placeholder="0" oninput="calcPortfolio()">
+          </div>
+          <div class="tf">
+            <div class="tf-label">Pérdidas realizadas año (CLP)</div>
+            <input class="tf-input" id="pLosses" type="number" step="any" min="0" placeholder="0" oninput="calcPortfolio()">
+          </div>
+          <div class="tf">
+            <div class="tf-label">Otros ingresos anuales (CLP)</div>
+            <input class="tf-input" id="pOther" type="number" step="any" min="0" placeholder="0" oninput="calcPortfolio()">
+          </div>
+        </div>
+        <div class="calc-btn-row">
+          <button class="calc-btn" onclick="calcPortfolio()">Calcular Proyección</button>
+          <button class="pdf-btn" id="pdfBtnPortfolio" onclick="exportPDF('portfolio')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Exportar PDF
+          </button>
+        </div>
+        <div class="tax-result-area" id="portfolioResult"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- ══ AUTH MODAL ══ -->
+<div class="modal-overlay" id="authModal" onclick="handleOverlayClick(event,'authModal')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Bienvenido</div>
+        <div class="modal-sub">Guarda tu portfolio y accede desde cualquier dispositivo</div>
+      </div>
+      <button class="modal-close" onclick="closeAuth()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchAuth('login')">Ingresar</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchAuth('register')">Crear cuenta</button>
+      </div>
+      <div id="authLogin">
+        <div class="auth-field">
+          <div class="auth-label">Correo electrónico</div>
+          <input class="auth-input" id="loginEmail" type="email" placeholder="tu@correo.cl">
+        </div>
+        <div class="auth-field">
+          <div class="auth-label">Contraseña</div>
+          <input class="auth-input" id="loginPass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="auth-submit" id="loginBtn" onclick="doLogin()">Ingresar</button>
+        <div id="loginMsg"></div>
+      </div>
+      <div id="authRegister" style="display:none">
+        <div class="auth-field">
+          <div class="auth-label">Correo electrónico</div>
+          <input class="auth-input" id="regEmail" type="email" placeholder="tu@correo.cl">
+        </div>
+        <div class="auth-field">
+          <div class="auth-label">Contraseña</div>
+          <input class="auth-input" id="regPass" type="password" placeholder="Mínimo 6 caracteres" onkeydown="if(event.key==='Enter')doRegister()">
+        </div>
+        <button class="auth-submit" id="regBtn" onclick="doRegister()">Crear cuenta gratis</button>
+        <div id="regMsg"></div>
+        <div class="auth-divider">Plan gratuito incluye</div>
+        <div style="display:flex;flex-direction:column;gap:.3rem">
+          <div class="pro-feat">Hasta 5 criptoactivos en tu portfolio</div>
+          <div class="pro-feat">Precios en tiempo real + conversión CLP</div>
+          <div class="pro-feat">Calculadora tributaria básica</div>
+          <div class="pro-feat">Acceso desde cualquier dispositivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRO MODAL ══ -->
+<div class="modal-overlay" id="proModal" onclick="handleOverlayClick(event,'proModal')">
+  <div class="modal modal-pro">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">⚡ Elige tu plan</div>
+        <div class="modal-sub">Desbloquea todo el potencial de Digital Asset Tracker</div>
+      </div>
+      <button class="modal-close" onclick="closePro()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="pro-plans">
+        <!-- PLAN BÁSICO -->
+        <div class="pro-plan">
+          <div class="pro-plan-name">Básico</div>
+          <div class="pro-plan-price">$5.000 <span class="pro-plan-period">CLP/mes</span></div>
+          <div class="pro-plan-coins">5 monedas</div>
+          <div class="pro-plan-features">
+            <div class="pro-feat">5 criptoactivos</div>
+            <div class="pro-feat">Precios en tiempo real</div>
+            <div class="pro-feat">Conversión CLP</div>
+            <div class="pro-feat no">Calculadora tributaria</div>
+            <div class="pro-feat no">PDF contador</div>
+          </div>
+        </div>
+        <!-- PLAN PRO -->
+        <div class="pro-plan">
+          <div class="pro-plan-name">Pro</div>
+          <div class="pro-plan-price">$9.990 <span class="pro-plan-period">CLP/mes</span></div>
+          <div class="pro-plan-coins">10 monedas</div>
+          <div class="pro-plan-features">
+            <div class="pro-feat">10 criptoactivos</div>
+            <div class="pro-feat">Calculadora tributaria</div>
+            <div class="pro-feat">PDF para contador</div>
+            <div class="pro-feat">Gráficos de velas</div>
+            <div class="pro-feat no">Multi-cliente</div>
+          </div>
+        </div>
+        <!-- PLAN EMPRENDEDOR -->
+        <div class="pro-plan featured">
+          <div class="pro-plan-badge">⭐ POPULAR</div>
+          <div class="pro-plan-name">Emprendedor</div>
+          <div class="pro-plan-price">$35.000 <span class="pro-plan-period">CLP/mes</span></div>
+          <div class="pro-plan-price-annual">$350.000/año · ahorra 17%</div>
+          <div class="pro-plan-coins">Activos ilimitados</div>
+          <div class="pro-plan-features">
+            <div class="pro-feat">Activos ilimitados</div>
+            <div class="pro-feat">Todo lo de Pro</div>
+            <div class="pro-feat">Alertas de precio</div>
+            <div class="pro-feat">Importar CSV</div>
+            <div class="pro-feat no">Multi-cliente</div>
+          </div>
+        </div>
+        <!-- PLAN CONTADOR -->
+        <div class="pro-plan">
+          <div class="pro-plan-name">Contador</div>
+          <div class="pro-plan-price">$49.990 <span class="pro-plan-period">CLP/mes</span></div>
+          <div class="pro-plan-price-annual">$599.990/año · ahorra 20%</div>
+          <div class="pro-plan-coins">Hasta 50 clientes</div>
+          <div class="pro-plan-features">
+            <div class="pro-feat">Todo lo de Emprendedor</div>
+            <div class="pro-feat">50 clientes</div>
+            <div class="pro-feat">Reportes F22 masivos</div>
+            <div class="pro-feat">Export Defontana/Nubox</div>
+            <div class="pro-feat">Soporte prioritario</div>
+          </div>
+        </div>
+      </div>
+      <div class="pro-cta-grid">
+        <button class="pro-cta" onclick="goCheckout('basico')">Básico · $5.000/mes</button>
+        <button class="pro-cta" onclick="goCheckout('pro')">Pro · $9.990/mes</button>
+        <button class="pro-cta gold" onclick="goCheckout('emprendedor')">Emprendedor · $35.000/mes</button>
+        <button class="pro-cta gold" onclick="goCheckout('contador')">Contador · $49.990/mes</button>
+      </div>
+      <div class="pro-legal">
+        Pago seguro via Stripe · Cancela cuando quieras · IVA incluido<br>
+        ¿Dudas? Escríbenos a <strong>hola@digitalassettracker.cl</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══ FIREBASE AUTH + FIRESTORE ═══ */
+const firebaseConfig = {
+  apiKey: "AIzaSyA5GTQztSYduZO8nl_BhJFXqBQe7RZhBxI",
+  authDomain: "digital-asset-tracker-84cdc.firebaseapp.com",
+  projectId: "digital-asset-tracker-84cdc",
+  storageBucket: "digital-asset-tracker-84cdc.firebasestorage.app",
+  messagingSenderId: "55199549937",
+  appId: "1:55199549937:web:bd42a9aa7c0e3cbf855c50"
+};
+let fbApp=null, fbAuth=null, fbDb=null;
+let saveTimer=null;
+
+function initFirebase(){
+  try{
+    fbApp=firebase.initializeApp(firebaseConfig);
+    fbAuth=firebase.auth();
+    fbDb=firebase.firestore();
+    fbAuth.onAuthStateChanged(async user=>{
+      if(user){ setUser(user); await loadPortfolio(user.uid); }
+      else{ clearUser(); }
+    });
+    console.log('✅ Firebase listo');
+  }catch(e){console.error('❌ Firebase error:',e.message);}
+}
+
+/* ─── GUARDAR (debounce 1.5s) ─── */
+function scheduleSave(){
+  if(isDemoMode){showToast('💾 Regístrate para guardar tu portfolio','saving');openAuth();switchAuth('register');return;}
+  if(!currentUser||!fbDb)return;
+  clearTimeout(saveTimer);
+  showSaveToast('💾 Guardando…','saving');
+  saveTimer=setTimeout(async()=>{
+    try{
+      const data=coins.map(c=>({id:c.id,n:c.n,full:c.full||c.n,qty:c.qty,price:c.price,chg:c.chg,img:c.img||''}));
+      await fbDb.collection('portfolios').doc(currentUser.uid).set({
+        coins:data, updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+      });
+      showSaveToast('✅ Guardado','ok');
+    }catch(e){ showSaveToast('⚠️ Error al guardar','err'); }
+  },1500);
+}
+
+/* ─── CARGAR ─── */
+async function loadPortfolio(uid){
+  if(!fbDb)return;
+  showSaveToast('📡 Cargando portfolio…','saving');
+  try{
+    const doc=await fbDb.collection('portfolios').doc(uid).get();
+    if(doc.exists && doc.data().coins?.length>0){
+      coins=doc.data().coins.map(c=>({
+        id:c.id, n:c.n, full:c.full||c.n,
+        qty:parseFloat(c.qty)||0, price:parseFloat(c.price)||0,
+        chg:parseFloat(c.chg)||0, img:c.img||''
+      }));
+      buildCards(); buildTicker(); updateMetrics();
+      fetchCrypto(); // actualiza precios al cargar
+      showSaveToast('✅ Portfolio cargado','ok');
+    } else {
+      // Primer login: guarda el portfolio inicial
+      showSaveToast('✨ Guardando portfolio inicial…','saving');
+      await saveNow();
+    }
+  }catch(e){ showSaveToast('⚠️ No se pudo cargar','err'); }
+}
+
+async function saveNow(){
+  if(!currentUser||!fbDb)return;
+  try{
+    const data=coins.map(c=>({id:c.id,n:c.n,full:c.full||c.n,qty:c.qty,price:c.price,chg:c.chg,img:c.img||''}));
+    await fbDb.collection('portfolios').doc(currentUser.uid).set({
+      coins:data, updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    showSaveToast('✅ Guardado','ok');
+  }catch(e){ showSaveToast('⚠️ Error','err'); }
+}
+
+/* ─── TOAST ─── */
+function showSaveToast(msg,type='ok'){
+  let t=document.getElementById('saveToast');
+  if(!t){
+    t=document.createElement('div'); t.id='saveToast';
+    t.style.cssText='position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:.5rem 1rem;font-size:.72rem;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:opacity .4s;pointer-events:none';
+    document.body.appendChild(t);
+  }
+  if(!msg){t.style.opacity='0';return;}
+  t.style.opacity='1';
+  t.textContent=msg;
+  t.style.color=type==='err'?'var(--red)':type==='saving'?'var(--accent)':'var(--green)';
+  t.style.borderColor=type==='err'?'var(--red)':type==='saving'?'var(--accent)':'var(--green)';
+  if(type==='ok')setTimeout(()=>{t.style.opacity='0';},2500);
+}
+
+/* ═══ PLAN STATE ═══ */
+const FREE_LIMIT=5;
+const ADMIN_EMAIL='apalaciosgaete@gmail.com';
+let currentUser=null;
+let userPlan='free';
+
+/* ═══ LANDING ═══ */
+function enterApp(){
+  document.getElementById('landing').classList.add('hidden');
+  document.getElementById('app').style.display='block';
+}
+function showLanding(){
+  document.getElementById('landing').classList.remove('hidden');
+  document.getElementById('app').style.display='none';
+}
+
+/* ═══ OVERLAY CLICK TO CLOSE ═══ */
+function handleOverlayClick(e,id){
+  if(e.target===document.getElementById(id)){
+    if(id==='authModal')closeAuth();
+    if(id==='proModal')closePro();
+  }
+}
+
+/* ═══ STATE ═══ */
+let dolarRate=862.82;
+const BASE_LOGO='https://cdn.jsdelivr.net/gh/simplr-sh/coin-logos/images';
+const GECKO_IDS={XRP:'ripple',XLM:'stellar',HBAR:'hedera-hashgraph',XDC:'xdce-crowd-sale',ADA:'cardano',POL:'polygon-ecosystem-token',ETH:'ethereum',QNT:'quant-network',ALGO:'algorand',XTZ:'tezos'};
+
+let coins=[
+  {n:'XRP', full:'XRP',        id:'ripple',                  img:'',qty:806.609858,  price:2.7161,   chg:-3.99},
+  {n:'XLM', full:'Stellar',    id:'stellar',                 img:'',qty:2379.6712,   price:0.16529,  chg:-5.86},
+  {n:'HBAR',full:'Hedera',     id:'hedera-hashgraph',        img:'',qty:61.787952,   price:3.02212,  chg:-7.37},
+  {n:'XDC', full:'XDC Network',id:'xdce-crowd-sale',         img:'',qty:1669.125299, price:0.03866,  chg: 1.04},
+  {n:'ADA', full:'Cardano',    id:'cardano',                 img:'',qty:197.038237,  price:0.27667,  chg: 5.82},
+  {n:'POL', full:'Polygon',    id:'polygon-ecosystem-token', img:'',qty:465.243126,  price:0.08894,  chg:-3.23},
+  {n:'ETH', full:'Ethereum',   id:'ethereum',                img:'',qty:0.017757,    price:2110.777, chg:-5.05},
+  {n:'QNT', full:'Quant',      id:'quant-network',           img:'',qty:0.128148,    price:70.4129,  chg: 8.30},
+  {n:'ALGO',full:'Algorand',   id:'algorand',                img:'',qty:300.812912,  price:0.10090,  chg:-4.09},
+  {n:'XTZ', full:'Tezos',      id:'tezos',                   img:'',qty:0.312509,    price:0.40037,  chg:-3.74},
+];
+coins.forEach(c=>{if(GECKO_IDS[c.n])c.img=`${BASE_LOGO}/${GECKO_IDS[c.n]}/large.png`;});
+
+/* IGC 2025 brackets */
+const IGC=[
+  {from:0,   to:13.5, rate:0,     factor:0},
+  {from:13.5,to:30,   rate:0.04,  factor:0.54},
+  {from:30,  to:50,   rate:0.08,  factor:1.74},
+  {from:50,  to:70,   rate:0.135, factor:4.49},
+  {from:70,  to:90,   rate:0.23,  factor:11.14},
+  {from:90,  to:120,  rate:0.304, factor:17.8},
+  {from:120, to:1e9,  rate:0.35,  factor:23.32},
+];
+
+/* ═══ FORMATTERS ═══ */
+const fUSD=(v,d)=>{const dd=d!==undefined?d:(v<0.01?6:v<1?4:2);return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:dd,maximumFractionDigits:dd}).format(v)};
+const fCLP=v=>new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',minimumFractionDigits:0}).format(v);
+const fNum=(v,d=2)=>new Intl.NumberFormat('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}).format(v);
+const fChg=v=>(v>0?'+':'')+v.toFixed(2)+'%';
+const chgCl=v=>v>0?'pos':v<0?'neg':'neu';
+
+/* ═══ DOTS / THEME ═══ */
+function setDot(id,st){const e=document.getElementById(id);if(!e)return;e.className='dot'+(st==='on'?' on':st==='err'?' err':'');}
+function setHeader(ok){setDot('hDot',ok?'on':'err');document.getElementById('hLbl').textContent=ok?'EN VIVO':'Sin conexión';}
+
+/* ═══ METRICS ═══ */
+function updateMetrics(){
+  const tot=coins.reduce((s,c)=>s+c.qty*c.price,0);
+  document.getElementById('mTotalUSD').textContent=fUSD(tot);
+  document.getElementById('mTotalCLP').textContent=fCLP(tot*dolarRate);
+  document.getElementById('mDolar').textContent=fCLP(dolarRate);
+  document.getElementById('mCnt').textContent=coins.length;
+  const avg=coins.reduce((s,c)=>s+c.chg,0)/coins.length;
+  const el=document.getElementById('mAvg');el.textContent=fChg(avg);el.className='metric-val '+chgCl(avg);el.style.fontSize='.9rem';
+}
+function updateTs(){document.getElementById('lastUpd').textContent=new Date().toLocaleString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});}
+
+/* ═══ TICKER ═══ */
+const NEWS=[
+  {t:'Fed mantiene tasas',n:null},{t:'Bitcoin soporte',n:'$83,200',up:true},
+  {t:'Volumen cripto cae',n:'4.2%',up:false},{t:'ETH Pectra fees',n:'$0.43',up:true},
+  {t:'XRP gana vs SEC',n:'+12.4%',up:true},{t:'Inflación Chile',n:'4.5% anual',up:false},
+  {t:'HBAR Google Cloud',n:'+18.7%',up:true},{t:'XDC activos reales',n:'$2.1B',up:true},
+];
+function buildTicker(){
+  const ci=coins.map(c=>({sym:c.n,price:fUSD(c.price),chg:fChg(c.chg),up:c.chg>0}));
+  const all=[...NEWS,...ci,...NEWS,...ci];
+  document.getElementById('tickerEl').innerHTML=all.map(it=>{
+    if(it.sym)return`<span class="t-item"><span class="t-sym">${it.sym}</span><span class="t-num">${it.price}</span><span class="t-num ${it.up?'up':''}">${it.chg}</span></span>`;
+    const n=it.n?`<span class="t-num ${it.up?'up':''}">${it.n}</span>`:'';
+    return`<span class="t-item">${it.t} ${n}</span>`;
+  }).join('');
+}
+
+/* ═══ CARDS ═══ */
+function sortedCoins(){return[...coins].sort((a,b)=>b.qty-a.qty);}
+function buildCards(){
+  const list=document.getElementById('cardList');list.innerHTML='';
+  sortedCoins().forEach((c,idx)=>{
+    const locked=!isPro()&&idx>=FREE_LIMIT;
+    const tUSD=c.qty*c.price,tCLP=tUSD*dolarRate,pCLP=c.price*dolarRate;
+    const imgHtml=c.img?`<img src="${c.img}" alt="${c.n}" class="coin-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:'';
+    const fbStyle=c.img?'display:none':'';
+    const w=document.createElement('div');w.className='card-wrap';w.id=`wrap-${c.id}`;
+    w.innerHTML=`
+      <div class="crypto-card" style="position:relative">
+        ${locked?`<div class="card-lock"><span class="lock-icon">🔒</span><span class="lock-msg">Activo ${idx+1} · Solo disponible en Plan Pro</span><button class="lock-btn" onclick="openPro()">⚡ Hazte Pro</button></div>`:''}
+        <div class="card-main" style="${locked?'filter:blur(3px);pointer-events:none':''}">
+          <div class="c-logo">${imgHtml}<div class="coin-fb" style="${fbStyle}">${c.n.substring(0,2)}</div></div>
+          <div class="c-name">
+            <div class="cn-name">${c.full||c.n}</div><div class="cn-sym">${c.n}</div>
+            <div class="cn-chg ${chgCl(c.chg)}" id="chg-${c.id}">${fChg(c.chg)} 24h</div>
+          </div>
+          <div class="c-qty">
+            <div class="qty-label">Cantidad</div>
+            <input class="qty-input" type="number" step="0.000001" min="0" value="${c.qty.toFixed(6)}" id="qty-${c.id}" oninput="onQty('${c.id}',this.value)">
+          </div>
+          <div class="c-val">
+            <div class="val-inner">
+              <div class="val-block">
+                <span class="vlbl">Precio</span>
+                <span class="vusd" id="pu-${c.id}">${fUSD(c.price)}</span>
+                <span class="vclp" id="pc-${c.id}">${fCLP(pCLP)}</span>
+              </div>
+              <div class="val-divider"></div>
+              <div class="val-block">
+                <span class="vlbl">Total</span>
+                <span class="vusd" id="tu-${c.id}">${fUSD(tUSD)}</span>
+                <span class="vclp" id="tc-${c.id}">${fCLP(tCLP)}</span>
+              </div>
+            </div>
+          </div>
+          <div class="c-status"><div style="display:flex;align-items:center;gap:.3rem"><span class="dot on"></span><span class="live-txt">EN VIVO</span></div></div>
+          <div class="c-chart">
+            <button class="del-btn" onclick="removeCoin('${c.id}')">✕ eliminar</button>
+          </div>
+        </div>`;
+    list.appendChild(w);
+  });
+  refreshTaxSelects();
+  updateLimitBar();
+}
+
+function onQty(id,val){
+  const c=coins.find(x=>x.id===id);if(!c)return;
+  c.qty=parseFloat(val)||0;
+  const tUSD=c.qty*c.price,tCLP=tUSD*dolarRate;
+  setEl(`tu-${id}`,fUSD(tUSD));setEl(`tc-${id}`,fCLP(tCLP));
+  updateMetrics();
+  scheduleSave();
+}
+function setEl(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+
+function removeCoin(id){
+  coins=coins.filter(c=>c.id!==id);
+  document.getElementById(`wrap-${id}`)?.remove();
+  updateMetrics();buildTicker();refreshTaxSelects();
+  scheduleSave();
+}
+
+function refreshValues(){
+  coins.forEach(c=>{
+    const qEl=document.getElementById(`qty-${c.id}`);if(qEl){const q=parseFloat(qEl.value);if(!isNaN(q))c.qty=q;}
+    const tUSD=c.qty*c.price,tCLP=tUSD*dolarRate,pCLP=c.price*dolarRate;
+    setEl(`pu-${c.id}`,fUSD(c.price));setEl(`pc-${c.id}`,fCLP(pCLP));
+    setEl(`tu-${c.id}`,fUSD(tUSD));setEl(`tc-${c.id}`,fCLP(tCLP));
+    const ch=document.getElementById(`chg-${c.id}`);
+    if(ch){ch.className='cn-chg '+chgCl(c.chg);ch.textContent=fChg(c.chg)+' 24h';}
+  });
+  updateMetrics();buildTicker();updateTs();
+}
+
+
+/* ═══ SEARCH ═══ */
+let sTimer=null;
+function onSearch(q){
+  clearTimeout(sTimer);const res=document.getElementById('searchRes');
+  if(!q||q.length<2){res.innerHTML='<div class="search-msg">Escribe al menos 2 caracteres</div>';return;}
+  res.innerHTML='<div class="sp" style="margin:.6rem auto"></div>';
+  sTimer=setTimeout(()=>doSearch(q),450);
+}
+async function doSearch(q){
+  const res=document.getElementById('searchRes');
+  try{
+    const r=await fetch(`https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(q)}`,{headers:{Accept:'application/json'}});
+    const data=await r.json();const items=(data.coins||[]).slice(0,7);
+    if(!items.length){res.innerHTML='<div class="search-msg">Sin resultados</div>';return;}
+    res.innerHTML=items.map(it=>{
+      const already=coins.some(c=>c.id===it.id);
+      return`<div class="search-result" onclick="addCoin('${it.id}','${it.symbol.toUpperCase()}','${it.name.replace(/'/g,"\\'")}','${it.large||it.thumb||''}')">
+        <img src="${it.large||it.thumb||''}" alt="${it.name}" class="sr-img" onerror="this.style.display='none'">
+        <div><div class="sr-name">${it.name}</div><div class="sr-sym">${it.symbol.toUpperCase()}</div></div>
+        ${already?'<span class="sr-ok">✓ En portfolio</span>':''}
+      </div>`;
+    }).join('');
+  }catch(e){res.innerHTML='<div class="search-msg">Error al buscar</div>';}
+}
+async function addCoin(id,sym,name,img){
+  if(coins.some(c=>c.id===id)){document.getElementById('searchRes').innerHTML=`<div class="search-msg" style="color:var(--accent)">${name} ya está en el portfolio</div>`;return;}
+  if(!isPro()&&coins.length>=FREE_LIMIT){
+    document.getElementById('searchRes').innerHTML=`<div class="search-msg" style="color:var(--amber)">🔒 Límite del plan gratuito (${FREE_LIMIT} activos). <span style="cursor:pointer;color:var(--accent);font-weight:700" onclick="openPro()">Hazte Pro →</span></div>`;
+    return;
+  }
+  const newCoin={n:sym,full:name,id,img,qty:0,price:0,chg:0};
+  coins.push(newCoin);
+  document.getElementById('searchIn').value='';
+  document.getElementById('searchRes').innerHTML=`<div class="search-msg" style="color:var(--green)">✓ ${name} agregado — obteniendo precio…</div>`;
+  try{
+    const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&sparkline=false&price_change_percentage=24h`,{headers:{Accept:'application/json'}});
+    const data=await r.json();
+    if(data[0]){newCoin.price=data[0].current_price;newCoin.chg=data[0].price_change_percentage_24h||0;}
+  }catch(e){}
+  buildCards();updateMetrics();buildTicker();
+  setTimeout(()=>{
+    const el=document.getElementById(`wrap-${id}`);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});const cc=el.querySelector('.crypto-card');cc.style.borderColor='var(--green)';setTimeout(()=>{cc.style.borderColor='';},2000);}
+    document.getElementById('searchRes').innerHTML='';
+  },400);
+  scheduleSave();
+}
+
+/* ═══ TAX TABS ═══ */
+function setTab(tab){
+  document.querySelectorAll('.ttab').forEach((b,i)=>{const t=['gain','mining','portfolio'][i];b.className='ttab'+(t===tab?' active':'');});
+  document.querySelectorAll('.tax-tab-content').forEach(d=>d.className='tax-tab-content');
+  document.getElementById(`tab-${tab}`).className='tax-tab-content show';
+}
+function refreshTaxSelects(){
+  buildGainTable();
+  const mSel=document.getElementById('mCoin');
+  if(mSel){const cur=mSel.value;mSel.innerHTML='<option value="">— Seleccionar —</option>';coins.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=`${c.n} — ${c.full}`;if(c.id===cur)o.selected=true;mSel.appendChild(o);});}
+}
+function fillMiningPrice(){
+  const c=coins.find(x=>x.id===document.getElementById('mCoin').value);if(!c)return;
+  document.getElementById('mPrice').value=c.price.toFixed(6);
+  calcMining();
+}
+
+/* ═══ IGC CALC ═══ */
+function calcIGC(totalIncome, utm){
+  const uta=12*utm;let tax=0;const rows=[];
+  IGC.forEach(br=>{
+    const fromCLP=br.from*uta;const toCLP=br.to*uta;
+    if(totalIncome<=fromCLP){rows.push({br,affected:0,tax:0,active:false});return;}
+    const affected=Math.min(totalIncome,toCLP)-fromCLP;
+    const t=affected*br.rate;tax+=t;
+    rows.push({br,affected,tax:t,active:affected>0&&br.rate>0});
+  });
+  return{tax,rows,effRate:totalIncome>0?(tax/totalIncome)*100:0};
+}
+
+function renderResult(containerId, data, pdfBtnId){
+  const el=document.getElementById(containerId);el.className='tax-result-area show';
+  const{cards,table,note}=data;
+  el.innerHTML=`
+    <div class="tr-cards">${cards.map(c=>`<div class="tr-card"><div class="tr-lbl">${c.lbl}</div><div class="tr-val ${c.cls||''}">${c.val}</div>${c.sub?`<div class="tr-sub">${c.sub}</div>`:''}</div>`).join('')}</div>
+    <table class="tr-table"><thead><tr>${table.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+    <tbody>${table.rows.map(r=>`<tr class="${r.active?'active-row':''}">${r.cells.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>
+    <div class="tax-note">${note}</div>`;
+  document.getElementById(pdfBtnId).className='pdf-btn show';
+}
+
+
+function calcMining(){
+  const qty=parseFloat(document.getElementById('mQty').value)||0;
+  const price=parseFloat(document.getElementById('mPrice').value)||0;
+  const costs=parseFloat(document.getElementById('mCosts').value)||0;
+  const other=parseFloat(document.getElementById('mOther').value)||0;
+  const utm=67294;
+  const activity=document.getElementById('mActivity').value;
+  if(!qty||!price){document.getElementById('miningResult').className='tax-result-area';document.getElementById('pdfBtnMining').className='pdf-btn';return;}
+  const ingrBrutoUSD=qty*price;const ingrBrutoCLP=ingrBrutoUSD*dolarRate;
+  const baseImponible=Math.max(0,ingrBrutoCLP-costs+other);
+  const{tax,rows,effRate}=calcIGC(baseImponible,utm);
+  const uta=12*utm;
+  const actLabel={mining:'Minería (PoW)',staking:'Staking (PoS)',yield:'Yield / Lending',airdrop:'Airdrop'}[activity];
+  const cards=[
+    {lbl:`Ingreso bruto ${actLabel}`,val:fUSD(ingrBrutoUSD),cls:'gain'},
+    {lbl:'Ingreso bruto (CLP)',val:fCLP(ingrBrutoCLP),cls:'gain'},
+    {lbl:'Gastos deducibles art.31',val:fCLP(costs),sub:'Electricidad, hardware'},
+    {lbl:'Base imponible total',val:fCLP(baseImponible),sub:`${(baseImponible/uta).toFixed(2)} UTA`},
+    {lbl:'IGC estimado',val:fCLP(tax),cls:'tax'},
+    {lbl:'Tasa efectiva',val:effRate.toFixed(2)+'%'},
+  ];
+  const tableData={headers:['Tramo IGC (UTA)','Tasa','Base afecta','Impuesto'],rows:rows.map(r=>({cells:[`${r.br.from}–${r.br.to>=1e8?'+∞':r.br.to}`,`${(r.br.rate*100).toFixed(1)}%`,fCLP(r.affected),fCLP(r.tax)],active:r.active}))};
+  renderResult('miningResult',{cards,table:tableData,note:`<strong>Minería/Staking:</strong> Clasificado como renta art.20 N°5 LIR (Oficio SII 963/2022). Deduce gastos necesarios para producirla (art.31). Puede requerir PPM mensual si ingresos anuales superan 1 UTM. Declara en F22 códigos 154/155.`},'pdfBtnMining');
+  window._taxDataMining={type:'mining',qty,price,ingrBrutoUSD,ingrBrutoCLP,costs,baseImponible,tax,activity:actLabel};
+}
+
+function calcPortfolio(){
+  const cost=parseFloat(document.getElementById('pCost').value)||0;
+  const val=parseFloat(document.getElementById('pVal').value)||coins.reduce((s,c)=>s+c.qty*c.price,0);
+  const realized=parseFloat(document.getElementById('pRealized').value)||0;
+  const losses=parseFloat(document.getElementById('pLosses').value)||0;
+  const other=parseFloat(document.getElementById('pOther').value)||0;
+  const utm=67294;const uta=12*utm;
+  const unrealizedUSD=val-cost;const unrealizedCLP=unrealizedUSD*dolarRate;
+  const netRealized=realized-losses;const baseImponible=Math.max(0,netRealized+other);
+  const{tax,rows,effRate}=calcIGC(baseImponible,utm);
+  const cards=[
+    {lbl:'Valor actual portfolio',val:fUSD(val),sub:'Precio de mercado'},
+    {lbl:'Ganancia no realizada',val:fCLP(unrealizedCLP),cls:unrealizedCLP>=0?'gain':'loss',sub:'Si vendieras hoy'},
+    {lbl:'Ganancia neta realizada',val:fCLP(netRealized),cls:netRealized>=0?'gain':'loss',sub:'Compensada con pérdidas'},
+    {lbl:'Base imponible total',val:fCLP(baseImponible),sub:`${(baseImponible/uta).toFixed(2)} UTA`},
+    {lbl:'IGC proyectado',val:fCLP(tax),cls:'tax'},
+    {lbl:'Tasa efectiva',val:effRate.toFixed(2)+'%'},
+  ];
+  const tableData={headers:['Tramo IGC (UTA)','Tasa','Base afecta','Impuesto'],rows:rows.map(r=>({cells:[`${r.br.from}–${r.br.to>=1e8?'+∞':r.br.to}`,`${(r.br.rate*100).toFixed(1)}%`,fCLP(r.affected),fCLP(r.tax)],active:r.active}))};
+  renderResult('portfolioResult',{cards,table:tableData,note:`<strong>Portfolio anual:</strong> Solo las ganancias realizadas (ventas efectuadas) son afectas a impuesto. Las no realizadas no generan obligación tributaria hasta la venta. Las pérdidas del año se compensan con ganancias. La diferencia positiva neta se suma a otros ingresos para el IGC en F22.`},'pdfBtnPortfolio');
+  document.getElementById('pVal').value=fNum(val,2);
+  window._taxDataPortfolio={type:'portfolio',val,cost,realized,losses,netRealized,baseImponible,tax,unrealizedCLP};
+}
+
+/* ═══ PDF EXPORT ═══ */
+
+/* ═══ AUTH MODALS ═══ */
+function openAuth(){document.getElementById('authModal').classList.add('open');}
+function closeAuth(){document.getElementById('authModal').classList.remove('open');}
+function openPro(){document.getElementById('proModal').classList.add('open');}
+function closePro(){document.getElementById('proModal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeAuth();closePro();}});
+
+function switchAuth(tab){
+  const isLogin=tab==='login';
+  document.getElementById('authLogin').style.display=isLogin?'block':'none';
+  document.getElementById('authRegister').style.display=isLogin?'none':'block';
+  document.getElementById('tabLogin').className='auth-tab'+(isLogin?' active':'');
+  document.getElementById('tabRegister').className='auth-tab'+(!isLogin?' active':'');
+}
+
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const btn=document.getElementById('loginBtn');
+  if(!email||!pass){showMsg('loginMsg','Completa todos los campos','err');return;}
+  btn.disabled=true;btn.textContent='Ingresando…';
+  try{
+    await fbAuth.signInWithEmailAndPassword(email,pass);
+    closeAuth();
+  }catch(e){
+    const msgs={'auth/user-not-found':'Usuario no encontrado','auth/wrong-password':'Contraseña incorrecta','auth/invalid-email':'Email inválido','auth/invalid-credential':'Email o contraseña incorrectos'};
+    showMsg('loginMsg',msgs[e.code]||e.message,'err');
+  }
+  btn.disabled=false;btn.textContent='Ingresar';
+}
+
+async function doRegister(){
+  const email=document.getElementById('regEmail').value.trim();
+  const pass=document.getElementById('regPass').value;
+  const btn=document.getElementById('regBtn');
+  if(!email||!pass){showMsg('regMsg','Completa todos los campos','err');return;}
+  if(pass.length<6){showMsg('regMsg','La contraseña debe tener al menos 6 caracteres','err');return;}
+  btn.disabled=true;btn.textContent='Creando cuenta…';
+  try{
+    await fbAuth.createUserWithEmailAndPassword(email,pass);
+    await fbAuth.currentUser.sendEmailVerification();
+    showMsg('regMsg','✅ Cuenta creada. Revisa tu email para verificar.','ok');
+    setTimeout(closeAuth,2500);
+  }catch(e){
+    const msgs={'auth/email-already-in-use':'Este email ya tiene una cuenta','auth/weak-password':'Contraseña muy débil','auth/invalid-email':'Email inválido'};
+    showMsg('regMsg',msgs[e.code]||e.message,'err');
+  }
+  btn.disabled=false;btn.textContent='Crear cuenta gratis';
+}
+
+function setUser(user){
+  currentUser=user;
+  const isAdmin=user.email===ADMIN_EMAIL;
+  if(isAdmin)userPlan='admin';
+  enterApp();
+  const btn=document.getElementById('userBtn');
+  const name=user.email.split('@')[0];
+  btn.className='user-btn logged';
+  const badge=isAdmin
+    ?`<span class="admin-badge">ADMIN</span>`
+    :userPlan==='free'?`<span class="free-badge">FREE</span>`:`<span class="pro-badge-tag">PRO</span>`;
+  btn.innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${name} ${badge}`;
+  btn.onclick=doLogout;
+  document.getElementById('upgradeHeaderBtn').style.display=isAdmin?'none':'flex';
+  updateLimitBar();
+}
+
+function clearUser(){
+  currentUser=null;userPlan='free';
+  const btn=document.getElementById('userBtn');
+  btn.className='user-btn';
+  btn.innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Ingresar`;
+  btn.onclick=openAuth;
+  document.getElementById('upgradeHeaderBtn').style.display='none';
+  buildCards();
+}
+
+async function doLogout(){
+  if(!confirm('¿Cerrar sesión?'))return;
+  await fbAuth.signOut();
+}
+
+function showMsg(id,txt,type){
+  const el=document.getElementById(id);if(!el)return;
+  el.className='auth-msg '+type;el.textContent=txt;
+  setTimeout(()=>{el.textContent='';el.className='auth-msg';},5000);
+}
+
+/* ═══ PLAN / LIMIT ═══ */
+function isPro(){return userPlan==='pro'||userPlan==='contador'||userPlan==='emprendedor'||userPlan==='admin'||userPlan==='basico'||currentUser?.email===ADMIN_EMAIL;}
+
+
+function updateLimitBar(){
+  const bar=document.getElementById('limitBar');
+  if(isPro()){bar.style.display='none';return;}
+  bar.style.display='flex';
+  const used=Math.min(coins.length,FREE_LIMIT);
+  const pct=Math.min((used/FREE_LIMIT)*100,100);
+  document.getElementById('limitUsed').textContent=used;
+  const fill=document.getElementById('limitFill');
+  fill.style.width=pct+'%';
+  fill.className='limit-fill'+(pct>=80?' warn':'');
+}
+
+/* ═══ CARDS — override to add lock ═══ */
+const _origBuildCards=buildCards; // will be redefined inline below
+
+/* ═══ TAX HIDE/SHOW ═══ */
+function hideTax(){closeCalc();}
+function showTax(){openCalc();}
+
+/* ═══ APIs ═══ */
+async function fetchDolar(){
+  setDot('dDot','');setHeader(false);
+  const sources=[
+    ['https://open.exchangerate-api.com/v6/latest/USD',d=>d.rates?.CLP],
+    ['https://mindicador.cl/api/dolar',d=>d.serie?.[0]?.valor],
+    ['https://api.frankfurter.app/latest?from=USD&to=CLP',d=>d.rates?.CLP],
+  ];
+  for(const[url,ext]of sources){
+    try{const r=await fetch(url,{signal:AbortSignal.timeout(5000)});const d=await r.json();const v=ext(d);
+      if(v){dolarRate=v;setDot('dDot','on');setHeader(true);
+        const now=new Date();
+        document.getElementById('dSub').textContent='Actualizado: '+now.toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+        refreshValues();return;}
+    }catch(e){}
+  }
+  setDot('dDot','err');document.getElementById('dSub').textContent='Sin conexión — valor anterior';
+}
+async function fetchCrypto(retry=0){
+  try{
+    const ids=coins.map(c=>c.id).join(',');
+    const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`,{headers:{Accept:'application/json'}});
+    if(!r.ok)throw new Error(r.status);
+    const data=await r.json();if(!Array.isArray(data)||!data.length)throw new Error('empty');
+    data.forEach(m=>{const c=coins.find(x=>x.id===m.id);if(c){c.price=m.current_price;c.chg=m.price_change_percentage_24h??c.chg;if(m.image&&!c.img)c.img=m.image;}});
+    refreshValues();
+    setDot('hDot','on');setHeader(true);
+  }catch(e){
+    if(retry<2)setTimeout(()=>fetchCrypto(retry+1),(retry+1)*2000);
+    else setDot('hDot','err');
+  }
+}
+
+
+
+// ── DEMO MODE ──
+let isDemoMode = false;
+
+const DEMO_COINS = [
+  {id:'ripple',       n:'XRP',  full:'XRP Ledger',        qty:806.61, price:0, chg:0, img:''},
+  {id:'stellar',      n:'XLM',  full:'Stellar',           qty:2379.67,price:0, chg:0, img:''},
+  {id:'hedera-hashgraph',n:'HBAR',full:'Hedera',          qty:61.79,  price:0, chg:0, img:''},
+  {id:'xdce-crowd-sale',n:'XDC', full:'XDC Network',      qty:1669.13,price:0, chg:0, img:''},
+  {id:'cardano',      n:'ADA',  full:'Cardano',           qty:197.04, price:0, chg:0, img:''},
+  {id:'polygon-ecosystem-token',n:'POL',full:'Polygon',   qty:465.24, price:0, chg:0, img:''},
+  {id:'ethereum',     n:'ETH',  full:'Ethereum',          qty:0.0178, price:0, chg:0, img:''},
+  {id:'quant-network',n:'QNT',  full:'Quant',             qty:0.1281, price:0, chg:0, img:''},
+  {id:'algorand',     n:'ALGO', full:'Algorand',          qty:300.81, price:0, chg:0, img:''},
+  {id:'tezos',        n:'XTZ',  full:'Tezos',             qty:0.3125, price:0, chg:0, img:''},
+];
+
+function enterDemo(){
+  isDemoMode = true;
+  // Load demo coins
+  coins = DEMO_COINS.map(c=>({...c}));
+  // Enter app
+  document.getElementById('landing').classList.add('hidden');
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('demoBanner').classList.add('show');
+  // Mark header user btn
+  const btn = document.getElementById('userBtn');
+  if(btn){
+    btn.className = 'user-btn logged';
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> demo <span class="demo-badge" style="font-size:.62rem;padding:.1rem .45rem;border-radius:4px;letter-spacing:.5px">DEMO</span>`;
+    btn.onclick = exitDemo;
+  }
+  const upgradeBtn = document.getElementById('upgradeHeaderBtn');
+  if(upgradeBtn) upgradeBtn.style.display = 'flex';
+  buildCards();
+  buildTicker();
+  updateMetrics();
+  fetchDolar();
+  fetchCrypto();
+  showToast('🎮 Modo demo activado — precios en tiempo real','ok');
+}
+
+function exitDemo(){
+  isDemoMode = false;
+  coins = [];
+  document.getElementById('demoBanner').classList.remove('show');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('landing').classList.remove('hidden');
+  // Reset user btn
+  const btn = document.getElementById('userBtn');
+  if(btn){
+    btn.className = 'user-btn';
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Mi cuenta`;
+    btn.onclick = () => openAuth();
+  }
+}
+
+// Auto-show demo prompt on landing after 2s
+function initDemoPrompt(){
+  setTimeout(()=>{
+    const p = document.getElementById('demoPrompt');
+    if(p) p.classList.add('visible');
+  }, 2000);
+}
+
+// ── ONDAS DE MERCADO ──
+(function(){
+  const cv = document.getElementById('landing-canvas');
+  if(!cv) return;
+  const ctx = cv.getContext('2d');
+  let W, H, t = 0;
+
+  const WAVES = [
+    { amp:.14, freq:.007, speed:.016, phase:0,    color:'79,145,246',  lw:1.8 },  // blue
+    { amp:.09, freq:.011, speed:.024, phase:1.8,  color:'18,217,149',  lw:1.4 },  // green
+    { amp:.07, freq:.005, speed:.012, phase:3.5,  color:'99,60,220',   lw:1.2 },  // purple
+    { amp:.055,freq:.015, speed:.030, phase:0.9,  color:'245,166,35',  lw:1.0 },  // amber
+    { amp:.045,freq:.019, speed:.038, phase:2.3,  color:'110,190,255', lw:.9  },  // light blue
+  ];
+
+  function resize(){
+    W = cv.width  = cv.offsetWidth;
+    H = cv.height = cv.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw(){
+    // Dark fade trail — slower fade = more overlap glow
+    ctx.fillStyle = 'rgba(6,13,28,0.10)';
+    ctx.fillRect(0, 0, W, H);
+
+    t++;
+
+    WAVES.forEach((w, wi) => {
+      // ── Filled area under wave ──
+      ctx.beginPath();
+      for(let x = 0; x <= W; x += 3){
+        const y = H * (.38 + wi * .055)
+                + H * w.amp * Math.sin(x * w.freq + t * w.speed + w.phase)
+                + H * w.amp * .3 * Math.sin(x * w.freq * 2.1 + t * w.speed * 1.6 + wi * .7);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+      ctx.fillStyle = `rgba(${w.color},0.035)`;
+      ctx.fill();
+
+      // ── Line stroke ──
+      ctx.beginPath();
+      for(let x = 0; x <= W; x += 3){
+        const y = H * (.38 + wi * .055)
+                + H * w.amp * Math.sin(x * w.freq + t * w.speed + w.phase)
+                + H * w.amp * .3 * Math.sin(x * w.freq * 2.1 + t * w.speed * 1.6 + wi * .7);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+
+      // Gradient stroke: bright center, fades at edges
+      const grad = ctx.createLinearGradient(0, 0, W, 0);
+      grad.addColorStop(0,   `rgba(${w.color},0)`);
+      grad.addColorStop(0.15,`rgba(${w.color},${0.35 + wi * .04})`);
+      grad.addColorStop(0.5, `rgba(${w.color},${0.60 + wi * .04})`);
+      grad.addColorStop(0.85,`rgba(${w.color},${0.35 + wi * .04})`);
+      grad.addColorStop(1,   `rgba(${w.color},0)`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = w.lw;
+      ctx.stroke();
+    });
+
+    // Subtle center radial glow behind content
+    const glow = ctx.createRadialGradient(W/2, H*.42, 0, W/2, H*.42, W*.38);
+    glow.addColorStop(0, 'rgba(79,145,246,0.045)');
+    glow.addColorStop(1, 'rgba(79,145,246,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initDemoPrompt();
+  initFirebase();
+  buildCards();
+  buildTicker();
+  updateMetrics();
+  fetchDolar();
+  fetchCrypto();
+  setInterval(fetchDolar,   5*60*1000);
+  setInterval(fetchCrypto,  2*60*1000);
+  setInterval(buildTicker,  30*1000);
+});
+</script>
+</body>
+</html>
