@@ -57,8 +57,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .land-feat-desc{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6}
 .land-footer{text-align:center;padding:1.5rem;font-size:.72rem;color:rgba(255,255,255,.3);border-top:1px solid rgba(255,255,255,.07)}
 
-/* ── HEADER (no sticky) ── */
-.header{background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--sh)}
+/* ── HEADER sticky ── */
+.header{background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--sh);position:sticky;top:0;z-index:300}
 .header-row1{max-width:1280px;margin:0 auto;padding:1.1rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:.85rem}
 .logo svg{width:46px;height:46px;flex-shrink:0}
@@ -87,7 +87,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .dot.err{background:var(--red)}
 
 /* TICKER — sticky */
-.ticker{background:#060d18;border-bottom:1px solid var(--border);height:44px;overflow:hidden;display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.ticker{background:#060d18;border-bottom:1px solid var(--border);height:44px;overflow:hidden;display:flex;align-items:center;position:relative;z-index:1}
 .ticker-tag{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-size:.7rem;font-weight:800;padding:0 1.1rem;height:100%;display:flex;align-items:center;letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0}
 .ticker-track{overflow:hidden;flex:1}
 .ticker-inner{display:flex;white-space:nowrap;align-items:center;animation:scroll 85s linear infinite}
@@ -102,7 +102,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .main{max-width:1280px;margin:0 auto;padding:1.25rem 1.75rem 3rem}
 
 /* ── TWO-COLUMN TOP SECTION ── */
-.top-cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;align-items:start}
+.top-cols{display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:1.25rem;align-items:start;max-width:50%}
 .tax-col{display:flex;flex-direction:column;width:100%}
 
 /* SEARCH */
@@ -121,6 +121,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .search-msg{font-size:.75rem;color:var(--text3);text-align:center;padding:.5rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 .sp{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
+
+/* ── TAX IN HEADER ── */
+.header-tax{border-top:1px solid var(--border);overflow:hidden;max-height:0;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
+.header-tax.open{max-height:700px}
+.header-tax-inner{max-width:1280px;margin:0 auto;padding:.85rem 1.75rem 1.1rem}
+.header-tax-toggle{max-width:1280px;margin:0 auto;padding:.5rem 1.75rem;display:flex;align-items:center;justify-content:center;cursor:pointer;gap:.6rem;border-top:1px solid var(--border);transition:.2s}
+.header-tax-toggle:hover{background:var(--surface2)}
+.htax-label{font-size:.73rem;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:.4rem}
+.header-tax-toggle:hover .htax-label{color:var(--accent)}
+.htax-arrow{font-size:.6rem;color:var(--text3);transition:transform .35s;display:inline-block}
+.htax-arrow.open{transform:rotate(180deg)}
 
 /* ── TAX PANEL ── */
 .tax-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.25rem;box-shadow:var(--sh);position:relative;width:100%}
@@ -250,7 +261,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .pro-plans{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}
 .pro-plan{border:2px solid var(--border);border-radius:12px;padding:.85rem .75rem;cursor:pointer;transition:.2s;position:relative}
 .pro-plan:hover{border-color:var(--accent);transform:translateY(-2px)}
-.pro-plan.featured{border-color:var(--accent);background:rgba(79,145,246,.06)}
+.pro-plan.featured{border-color:var(--accent);background:rgba(37,99,235,.04)}
 .pro-plan-badge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:.55rem;font-weight:800;padding:.18rem .6rem;border-radius:20px;white-space:nowrap;letter-spacing:.5px}
 .pro-plan-name{font-size:.68rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem}
 .pro-plan-price{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:800;color:var(--text);line-height:1.1}
@@ -407,42 +418,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <div class="metric-sub">criptomonedas rastreadas</div>
     </div>
   </div>
-  <!-- TICKER sticky -->
-  <div class="ticker">
-    <div class="ticker-tag">📡 LIVE</div>
-    <div class="ticker-track"><div class="ticker-inner" id="tickerEl"></div></div>
+  <!-- TAX TOGGLE -->
+  <div class="header-tax-toggle" onclick="toggleHeaderTax()">
+    <span class="htax-label">🇨🇱 Calculadora Tributaria · Legislación Chile 2025</span>
+    <span class="htax-arrow" id="htaxArrow">▼</span>
   </div>
-</header>
-
-<!-- MAIN -->
-<div class="main">
-
-  <!-- TWO-COLUMN: SEARCH + TAX -->
-  <div class="top-cols">
-
-    <!-- SEARCH -->
-    <div class="search-box">
-      <div class="panel-title">🔍 Agregar criptoactivo</div>
-      <input class="search-input" id="searchIn" type="text" placeholder="Buscar por nombre o símbolo…" autocomplete="off" oninput="onSearch(this.value)">
-      <div class="search-results" id="searchRes">
-        <div class="search-msg">Escribe al menos 2 caracteres para buscar</div>
-      </div>
-    </div>
-
-    <!-- RIGHT COLUMN: TAX SHOW BUTTON or TAX CALCULATOR -->
-    <div class="tax-col">
-
-    <!-- TAX SHOW BUTTON (shown by default) -->
-    <div class="tax-show-btn" id="taxShowBtn" onclick="showTax()">
-      <div class="tax-show-btn-label">🇨🇱 Calculadora Tributaria</div>
-      <div class="tax-show-btn-hint">Clic para abrir ↓</div>
-    </div>
-
-    <!-- TAX CALCULATOR (hidden by default) -->
-    <div class="tax-panel tax-hidden" id="taxPanel">
-      <div class="tax-panel-header">
-        <div class="panel-title" style="margin:0">🇨🇱 Calculadora Tributaria · Legislación Chile 2025</div>
-        <button class="tax-close-btn" onclick="hideTax()" title="Cerrar calculadora">✕</button>
+  <!-- TAX PANEL -->
+  <div class="header-tax" id="taxPanel">
+    <div class="header-tax-inner">
+      <button class="tax-close-btn" onclick="hideTax()" title="Cerrar calculadora">✕</button>
       </div>
       <div class="tax-tabs">
         <button class="ttab active" onclick="setTab('gain')">Ganancia de Capital</button>
@@ -595,9 +579,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
         </div>
         <div class="tax-result-area" id="portfolioResult"></div>
       </div>
+    </div>
+  </div>
 
-    </div><!-- /tax-panel -->
-    </div><!-- /tax-col -->
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-tag">📡 LIVE</div>
+    <div class="ticker-track"><div class="ticker-inner" id="tickerEl"></div></div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TWO-COLUMN: SEARCH + TAX -->
+  <div class="top-cols">
+
+    <!-- SEARCH -->
+    <div class="search-box">
+      <div class="panel-title">🔍 Agregar criptoactivo</div>
+      <input class="search-input" id="searchIn" type="text" placeholder="Buscar por nombre o símbolo…" autocomplete="off" oninput="onSearch(this.value)">
+      <div class="search-results" id="searchRes">
+        <div class="search-msg">Escribe al menos 2 caracteres para buscar</div>
+      </div>
+    </div>
+
   </div><!-- /top-cols -->
 
   <!-- CARDS -->
@@ -1501,13 +1507,15 @@ function updateLimitBar(){
 const _origBuildCards=buildCards; // will be redefined inline below
 
 /* ═══ TAX HIDE/SHOW ═══ */
-function hideTax(){
-  document.getElementById('taxPanel').classList.add('tax-hidden');
-  document.getElementById('taxShowBtn').style.display='flex';
-}
-function showTax(){
-  document.getElementById('taxPanel').classList.remove('tax-hidden');
-  document.getElementById('taxShowBtn').style.display='none';
+function hideTax(){toggleHeaderTax(false);}
+function showTax(){toggleHeaderTax(true);}
+function toggleHeaderTax(force){
+  const panel=document.getElementById('taxPanel');
+  const arrow=document.getElementById('htaxArrow');
+  const isOpen=panel.classList.contains('open');
+  const shouldOpen=(force===undefined)?!isOpen:!!force;
+  panel.classList.toggle('open',shouldOpen);
+  if(arrow)arrow.classList.toggle('open',shouldOpen);
 }
 
 /* ═══ APIs ═══ */
